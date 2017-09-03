@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yzrilyzr.ui.myLinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:orientation="vertical">
+
+	<ImageView
+		android:layout_height="30dp"
+		android:layout_width="30dp"
+		android:id="@+id/mainwindowButton5"
+		android:visibility="gone"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="center">
+
+		<ImageView
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			android:layout_margin="2dp"
+			android:src="@drawable/icon"
+			android:id="@+id/mainwindowImageView1"/>
+
+		<com.yzrilyzr.ui.myTextView
+			android:layout_height="30dp"
+			android:text="New Window"
+			android:gravity="left|center"
+			android:layout_width="wrap_content"
+			android:id="@+id/mainwindowTextView1"
+			android:layout_weight="1.0"
+			android:singleLine="true"
+			android:ellipsize="end"/>
+
+		<ImageView
+			android:src="@drawable/unfocusable"
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			android:id="@+id/mainwindowButton1"/>
+
+		<ImageView
+			android:src="@drawable/min"
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			android:id="@+id/mainwindowButton2"/>
+
+		<ImageView
+			android:src="@drawable/max"
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			android:id="@+id/mainwindowButton3"/>
+
+		<ImageView
+			android:src="@drawable/close"
+			android:layout_height="30dp"
+			android:layout_width="30dp"
+			android:id="@+id/mainwindowButton4"/>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.ui.myLinearLayoutBack
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_margin="3dp"
+		android:orientation="vertical"/>
+
+</com.yzrilyzr.ui.myLinearLayout>
+

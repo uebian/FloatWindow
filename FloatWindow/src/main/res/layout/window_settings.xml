@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent"
+	android:orientation="vertical"
+	android:focusable="true"
+	android:focusableInTouchMode="true">
+
+	<LinearLayout
+		android:layout_height="fill_parent"
+		android:layout_width="fill_parent"
+		android:orientation="vertical"
+		android:padding="5dp">
+
+		<com.yzrilyzr.ui.myTextViewTitleBack
+			android:layout_height="wrap_content"
+			android:text="界面颜色"
+			android:layout_width="360dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="主要颜色"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myColorView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				android:id="@+id/windowsettingsmyColorView1"
+				android:onClick="e"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="背景颜色"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myColorView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				android:id="@+id/windowsettingsmyColorView2"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="高亮颜色"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myColorView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				android:id="@+id/windowsettingsmyColorView3"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myTextViewTitleBack
+			android:layout_height="wrap_content"
+			android:text="文字显示"
+			android:layout_width="wrap_content"
+			android:layout_marginTop="40dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="前景色"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myColorView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				android:id="@+id/windowsettingsmyColorView4"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="背景色"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myColorView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				android:id="@+id/windowsettingsmyColorView5"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="高亮色"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myColorView
+				android:layout_height="40dp"
+				android:layout_width="40dp"
+				android:id="@+id/windowsettingsmyColorView6"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="使用内置字体"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:src="@android:drawable/ic_delete"
+				android:id="@+id/windowsettingsmySwitch1"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="文字大小"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="40dp"
+				android:layout_width="80dp"
+				android:inputType="number"
+				android:gravity="center"
+				android:id="@+id/windowsettingsmyEditText1"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="标题文字大小"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="40dp"
+				android:layout_width="80dp"
+				android:inputType="number"
+				android:gravity="center"
+				android:id="@+id/windowsettingsmyEditText2"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myTextViewTitleBack
+			android:layout_height="wrap_content"
+			android:text="其他显示设置"
+			android:layout_width="wrap_content"
+			android:layout_marginTop="40dp"/>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="5px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="组件内边距"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="40dp"
+				android:layout_width="80dp"
+				android:inputType="number"
+				android:gravity="center"
+				android:id="@+id/windowsettingsmyEditText3"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="开启阴影"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.mySwitch
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:src="@android:drawable/ic_delete"
+				android:id="@+id/windowsettingsmySwitch2"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="1px"
+			android:layout_width="match_parent"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:gravity="left|center"
+			android:padding="5dp">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="圆角大小"
+				android:layout_width="wrap_content"
+				android:layout_weight="1.0"/>
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="40dp"
+				android:layout_width="80dp"
+				android:inputType="number"
+				android:gravity="center"
+				android:id="@+id/windowsettingsmyEditText4"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</ScrollView>
+

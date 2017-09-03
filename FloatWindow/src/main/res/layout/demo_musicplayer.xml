@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yzrilyzr.ui.myLinearLayoutBack
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:yzr="http://schemas.android.com/apk/res/com.yzrilyzr.uidemo"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:orientation="vertical"
+	android:focusable="true"
+	android:focusableInTouchMode="true">
+
+	<!--com.yzrilyzr.ui.myToolBar
+		android:layout_height="50dp"
+		android:layout_width="match_parent"
+		yzr:src0="@drawable/icon"
+		yzr:tip0="Fuck You!"
+		yzr:onClick0="exit"
+		yzr:title="Fuck You Music Player"/-->
+				<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="播放"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"
+			android:layout_margin="5dp"
+			android:onClick="list0"/>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="文件"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"
+			android:layout_margin="5dp"
+			android:onClick="list1"/>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="列表"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"
+			android:layout_margin="5dp"
+			android:onClick="list2"/>
+
+	</LinearLayout>
+
+	<com.yzrilyzr.ui.myTextViewTitleBack
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:maxLines="1"
+		android:id="@+id/demomusicplayerTextView1"
+		android:ellipsize="marquee"/>
+
+	<com.yzrilyzr.ui.myViewPager
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:id="@+id/demomusicplayerViewPager1"
+		android:layout_weight="1.0"/>
+
+	<LinearLayout
+		android:layout_height="50dp"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:id="@+id/demomusicplayerLinearLayout1">
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:onClick="ran"
+			android:src="@drawable/playbylist"
+			android:layout_weight="1.0"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:onClick="prev"
+			android:layout_margin="5dp"
+			android:src="@drawable/prevm"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:onClick="pause"
+			android:layout_margin="5dp"
+			android:src="@drawable/pause"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:onClick="next"
+			android:layout_margin="5dp"
+			android:src="@drawable/nextm"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:onClick="mode"
+			android:layout_margin="5dp"
+			android:src="@drawable/onestop"
+			android:layout_weight="1.0"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.ui.myTextViewBack
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/demomusicplayerTextView4"
+			android:layout_margin="5dp"/>
+
+		<com.yzrilyzr.ui.mySeekBar
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/demomusicplayerSeekBar1"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myTextViewBack
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/demomusicplayerTextView5"
+			android:layout_margin="5dp"/>
+
+	</LinearLayout>
+
+</com.yzrilyzr.ui.myLinearLayoutBack>
+

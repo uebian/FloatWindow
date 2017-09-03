@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+
+	
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.ui.myLinearLayoutRipple
+			android:layout_height="80dp"
+			android:layout_width="80dp"
+			android:orientation="vertical"
+			android:gravity="center"
+			android:onClick="clickEvent"
+			android:layout_margin="5dp"
+			android:id="@+id/windowapiclassmyLinearLayoutRipple1">
+
+			<ImageView
+				android:layout_height="50dp"
+				android:layout_width="50dp"
+				android:src="@drawable/objects"
+				android:scaleType="fitXY"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="类 信息"
+				android:layout_width="wrap_content"/>
+
+		</com.yzrilyzr.ui.myLinearLayoutRipple>
+
+		<com.yzrilyzr.ui.myLinearLayoutRipple
+			android:layout_height="80dp"
+			android:layout_width="80dp"
+			android:orientation="vertical"
+			android:gravity="center"
+			android:layout_margin="5dp"
+			android:onClick="clickEvent"
+			android:id="@+id/windowapiclassmyLinearLayoutRipple2">
+
+			<ImageView
+				android:layout_height="50dp"
+				android:layout_width="50dp"
+				android:src="@drawable/objects"
+				android:scaleType="fitXY"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="构造函数"
+				android:layout_width="wrap_content"/>
+
+		</com.yzrilyzr.ui.myLinearLayoutRipple>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.ui.myLinearLayoutRipple
+			android:layout_height="80dp"
+			android:layout_width="80dp"
+			android:orientation="vertical"
+			android:gravity="center"
+			android:onClick="clickEvent"
+			android:layout_margin="5dp"
+			android:id="@+id/windowapiclassmyLinearLayoutRipple3">
+
+			<ImageView
+				android:layout_height="50dp"
+				android:layout_width="50dp"
+				android:src="@drawable/box_blue"
+				android:scaleType="fitXY"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="域 信息"
+				android:layout_width="wrap_content"/>
+
+		</com.yzrilyzr.ui.myLinearLayoutRipple>
+
+		<com.yzrilyzr.ui.myLinearLayoutRipple
+			android:layout_height="80dp"
+			android:layout_width="80dp"
+			android:orientation="vertical"
+			android:gravity="center"
+			android:layout_margin="5dp"
+			android:onClick="clickEvent"
+			android:id="@+id/windowapiclassmyLinearLayoutRipple4">
+
+			<ImageView
+				android:layout_height="50dp"
+				android:layout_width="50dp"
+				android:src="@drawable/box_red"
+				android:scaleType="fitXY"/>
+
+			<com.yzrilyzr.ui.myTextView
+				android:layout_height="wrap_content"
+				android:text="方法 信息"
+				android:layout_width="wrap_content"/>
+
+		</com.yzrilyzr.ui.myLinearLayoutRipple>
+
+	</LinearLayout>
+    <ListView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+		android:id="@+id/windowapiclassListView1"/>
+</LinearLayout>
+
