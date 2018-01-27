@@ -390,7 +390,7 @@ public class MainService extends Service
         {
             Class<?> c=Class.forName(clazz);
             LongTextView ltv=new LongTextView(ctx);
-            ltv.setText(new ClassSrc(c).get());
+            ltv.setText(new ClassSrc(c,false).get());
             new Window(ctx,-2,-2)
                 .setTitle(c.getSimpleName()+".class")
                 .setIcon(R.drawable.objects)
