@@ -13,12 +13,12 @@ import org.xmlpull.v1.XmlPullParser;
 public class API
 {
     public static Intent intent=new Intent();
-    public static final String WINDOW_CLASS="com.yzrilyzr.FloatWindow.Window";
+    public static final String WINDOW_CLASS="com.yzrilyzr.floatingwindow.Window";
     public static final int API_VERSION=2;
     public static void startMainService(Context ctx,String targetClass)
     {
         intent.setAction("com.yzrilyzr.Service");
-        intent.setPackage("com.yzrilyzr.FloatWindow");
+        intent.setPackage("com.yzrilyzr.floatingwindow");
         intent.putExtra("pkg",ctx.getPackageName());
         intent.putExtra("class",targetClass);
         //Intent i2=new Intent(createExplicitFromImplicitIntent(ctx,intent));

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yzrilyzr.ui.mySlidingMenu
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:id="@+id/mainmySlidingMenu1">
+
+	<LinearLayout
+		android:layout_height="match_parent"
+		android:layout_width="wrap_content"
+		android:orientation="vertical">
+
+		<com.yzrilyzr.ui.myLinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="vertical"
+			android:gravity="center"
+			android:padding="20dp">
+
+			<ImageView
+				android:layout_height="200dp"
+				android:layout_width="wrap_content"
+				android:id="@+id/mainImageView1"/>
+
+			<com.yzrilyzr.ui.myTextViewTitle
+				android:layout_height="wrap_content"
+				android:text="yzrilyzr"
+				android:gravity="center"
+				android:layout_width="match_parent"
+				android:layout_marginTop="10dp"/>
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="yzrilyzr"
+				android:layout_width="match_parent"
+				android:layout_margin="5dp"
+				color2Back="true"
+				round="true"/>
+
+		</com.yzrilyzr.ui.myLinearLayout>
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:layout_height="match_parent"
+		android:focusable="true"
+		android:focusableInTouchMode="true"
+		android:layout_width="match_parent">
+
+		<ScrollView
+			android:layout_height="match_parent"
+			android:layout_width="match_parent">
+
+			<LinearLayout
+				android:layout_height="match_parent"
+				android:layout_width="match_parent"
+				android:orientation="vertical"
+				android:gravity="top|center_vertical"
+				android:measureWithLargestChild="true">
+
+				<com.yzrilyzr.ui.myButton
+					android:layout_height="wrap_content"
+					android:text="点我显示AlertDialog"
+					android:layout_width="match_parent"
+					android:layout_margin="5dp"
+					android:onClick="showDialog"/>
+
+				<LinearLayout
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:orientation="horizontal">
+
+					<com.yzrilyzr.ui.myTitleButton
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						text="提示"
+						vec="preset/settings"
+						android:layout_margin="5dp"
+						android:onClick="icon"/>
+
+					<com.yzrilyzr.ui.mySwitch
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:layout_margin="5dp"/>
+
+					<com.yzrilyzr.ui.myCheckBox
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:id="@+id/mainmyCheckBox1"/>
+
+					<LinearLayout
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:orientation="vertical"
+						android:layout_margin="5dp">
+
+						<com.yzrilyzr.ui.myTextView
+							android:layout_height="wrap_content"
+							android:text="普通"
+							android:layout_width="match_parent"/>
+
+						<com.yzrilyzr.ui.myTextViewBack
+							android:layout_height="wrap_content"
+							android:text="背景"
+							android:layout_width="match_parent"
+							android:onClick="music"/>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:orientation="vertical"
+						android:layout_margin="5dp">
+
+						<com.yzrilyzr.ui.myTextViewTitle
+							android:layout_height="wrap_content"
+							android:text="普通标题"
+							android:layout_width="match_parent"/>
+
+						<com.yzrilyzr.ui.myTextViewTitleBack
+							android:layout_height="wrap_content"
+							android:text="背景标题"
+							android:layout_width="match_parent"/>
+
+					</LinearLayout>
+
+					<com.yzrilyzr.ui.myLoadingView
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"/>
+
+				</LinearLayout>
+
+				<com.yzrilyzr.ui.mySeekBar
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:layout_margin="5dp"
+					android:progress="25"
+					android:secondaryProgress="50"
+					android:id="@+id/mainmySeekBar1"/>
+
+				<com.yzrilyzr.ui.myProgressBar
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:max="100"
+					android:progress="25"
+					android:secondaryProgress="50"
+					android:layout_margin="5dp"/>
+
+				<com.yzrilyzr.ui.myEditText
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:hint="提示"
+					android:layout_margin="5dp"/>
+
+				<LinearLayout
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent">
+
+					<com.yzrilyzr.ui.myImageButton
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						vec="lte"
+						android:layout_margin="5dp"/>
+
+					<com.yzrilyzr.ui.myColorView
+						android:layout_height="50dp"
+						android:layout_width="50dp"
+						android:id="@+id/mainmyColorView1"
+						android:layout_margin="5dp"/>
+
+				</LinearLayout>
+
+				<com.yzrilyzr.ui.myCanvas
+					android:layout_height="1px"
+					android:layout_width="1px"
+					android:id="@+id/mainmyCanvas1"
+					android:layout_margin="5dp"/>
+
+				<com.yzrilyzr.ui.myViewPager
+					android:layout_height="0dp"
+					android:layout_width="0dp"
+					android:id="@+id/mainmyViewPager1"/>
+
+				<com.yzrilyzr.ui.myListView
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:id="@+id/mainmyListView1"
+					android:layout_margin="5dp"/>
+
+			</LinearLayout>
+
+		</ScrollView>
+
+		<com.yzrilyzr.ui.myToolBar
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			title="UIDemo"
+			vec0="class"
+			tip0="菜单"
+			vec1="method"
+			tip1="UI设置"/>
+
+		<com.yzrilyzr.ui.myFab
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_gravity="bottom|right"
+			vec="folder"
+			android:layout_margin="20dp"/>
+
+	</FrameLayout>
+
+</com.yzrilyzr.ui.mySlidingMenu>
+

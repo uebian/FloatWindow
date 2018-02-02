@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent">
+
+	<com.yzrilyzr.ui.myToolBar
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		title="New Activity"
+		src0="@drawable/icon"
+		tip0="CWUI Activity"
+		onClick1="menu"
+		src1="@drawable/menu_w"
+		tip1="菜单"
+		android:id="@+id/activitymainmyToolBar1"/>
+
+	<LinearLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:layout_marginTop="55dp"
+		android:id="@+id/activitymainLinearLayout1"/>
+
+</FrameLayout>
+

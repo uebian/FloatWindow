@@ -1,18 +1,30 @@
 package com.yzrilyzr.FlappyFrog;
 
-import android.content.*;
 import android.graphics.*;
-import android.media.*;
-import android.view.*;
-import java.io.*;
-import java.util.*;
-import java.util.zip.*;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.widget.Toast;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.net.Uri;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
 import com.yzrilyzr.FloatWindow.API;
-import android.content.res.AssetManager;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 public class Main implements SurfaceHolder.Callback,Runnable,MediaPlayer.OnCompletionListener,API.WindowInterface,View.OnTouchListener
 {
 	SoundPool sp;
@@ -32,7 +44,7 @@ public class Main implements SurfaceHolder.Callback,Runnable,MediaPlayer.OnCompl
     long time=0;
     ArrayList<RectObj> PIPES,CLOUDS;
     RectObj FROG,PIPE,PASS;
-    RectObj restartObj,bgmObj;
+    RectObj restartObj,bgmObj,githubObj;
     SurfaceHolder holder;
     @Override
     public void surfaceCreated(SurfaceHolder p1)
@@ -121,6 +133,7 @@ public class Main implements SurfaceHolder.Callback,Runnable,MediaPlayer.OnCompl
         holder.addCallback(this);
         window=API.class2Object(API.WINDOW_CLASS,new Class[]{Context.class,int.class,int.class},new Object[]{ctx,(int)dip(270),(int)dip(480)});
         API.invoke(window,"setTitle","FlappyFrog");
+		API.invoke(window,"setIcon",new Class[]{Drawable.class},new BitmapDrawable(loadAsset("res/drawable/ic_launcher.png")));
         API.invoke(window,"show");
         API.invoke(window,"setBar",8,0,0,0);
         API.invoke(window,"addView",view);
@@ -225,6 +238,16 @@ public class Main implements SurfaceHolder.Callback,Runnable,MediaPlayer.OnCompl
 				}
 				return false;
             }
+			if(githubObj.contains(e.getX(),e.getY()))
+			{
+				Intent intent = new Intent();
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.setAction(Intent.ACTION_VIEW);
+				Uri content_url = Uri.parse("https://www.github.com/yzrilyzr");   
+				intent.setData(content_url);  
+				ctx.startActivity(intent);
+				return false;
+			}
 			if(NOW==1)
 			{
 				NOW=2;
@@ -368,9 +391,11 @@ public class Main implements SurfaceHolder.Callback,Runnable,MediaPlayer.OnCompl
         if(NOW!=2)canvas.drawText(String.format("累计被续%d秒",totalTime),vw/2,paint.getTextSize(),paint);
         paint.setColor(0xff000000);
 		paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("\"5\"可奉告",0,paint.getTextSize(),paint);
+		float tw=paint.measureText("\"5\"可奉告");
+		if(githubObj==null)githubObj=new RectObj(0,0,tw,paint.getTextSize(),0,0);
+		canvas.drawText("\"5\"可奉告",0,paint.getTextSize(),paint);
 		paint.setTextAlign(Paint.Align.RIGHT);
-        float tw=paint.measureText("请州长夫人演唱");
+        tw=paint.measureText("请州长夫人演唱");
 		if(bgmObj==null)bgmObj=new RectObj(vw-tw,0,tw,paint.getTextSize(),0,0);
 		bgmObj.setX(vw-tw);
         canvas.drawText("请州长夫人演唱",bgmObj.right,bgmObj.bottom,paint);
