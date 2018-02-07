@@ -13,8 +13,9 @@ import android.widget.Toast;
 import com.yzrilyzr.floatingwindow.R;
 import com.yzrilyzr.myclass.util;
 
-public class myTitleButton extends ImageButton
+public class myTitleButton extends ImageButton implements myTouchProcessor.Event
 {
+	private myTouchProcessor pr;
 	private Context ctx;
 	private String text=null;
 	private myRippleDrawable mrd;
@@ -25,28 +26,11 @@ public class myTitleButton extends ImageButton
 		if(a!=null)text=a.getAttributeValue(null,"text");
      	int p=uidata.UI_PADDING_DEFAULT;
 		setPadding(p,p,p,p);
-		mrd=new myRippleDrawable(uidata.UI_COLOR_MAIN,uidata.UI_COLOR_MAINHL,0);
+		mrd=new myRippleDrawable(uidata.UI_COLOR_MAIN,0);
 		setBackground(mrd);
 		WidgetUtils.setIcon(this,a);
 		setScaleType(ImageView.ScaleType.FIT_XY);
-		setOnTouchListener(new myTouchListener(){
-				@Override public void onDown(View v,MotionEvent m)
-				{mrd.shortRipple(m.getX(),m.getY());}
-				@Override public boolean onLongClick(View v,MotionEvent m)
-				{
-					if(text!=null)
-					{
-						Toast t=new Toast(ctx);
-						ViewGroup vg=(ViewGroup) LayoutInflater.from(ctx).inflate(R.layout.layout_toast,null);
-						t.setView(vg);
-						t.setDuration(1000);
-						t.setGravity(Gravity.LEFT|Gravity.TOP,(int)(m.getRawX()-m.getX()),(int)(m.getRawY()-m.getY()+getHeight()/2));
-						((TextView)vg.getChildAt(0)).setText(text);
-						t.show();
-					}
-					return true;
-				}
-			});
+		pr=new myTouchProcessor(this);
 	}
 	public myTitleButton(Context c)
 	{
@@ -63,6 +47,42 @@ public class myTitleButton extends ImageButton
 		int i=util.px(50);
 		setMeasuredDimension(WidgetUtils.measure(widthMeasureSpec,i),WidgetUtils.measure(heightMeasureSpec,i));
 	}
-
-
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		if(pr.process(this,event))return true;
+		return super.onTouchEvent(event);
+	}
+	@Override
+	public void onDown(View v, MotionEvent m)
+	{
+		mrd.shortRipple(m.getX(),m.getY());
+	}
+	@Override
+	public void onUp(View v, MotionEvent m)
+	{
+	}
+	@Override
+	public boolean onView(View v, MotionEvent m)
+	{
+		return false;
+	}
+	@Override
+	public void onClick(View v)
+	{
+	}
+	@Override
+	public boolean onLongClick(View v, MotionEvent m)
+	{
+		mrd.longRipple(m.getX(),m.getY());
+		if(text!=null)
+		{
+			myToast t=new myToast(ctx);
+			t.setDuration(1000);
+			t.setGravity(Gravity.LEFT|Gravity.TOP,(int)(m.getRawX()-m.getX()),(int)(m.getRawY()-m.getY()+getHeight()/2));
+			t.setText(text);
+			t.show();
+		}
+		return false;
+	}
 }

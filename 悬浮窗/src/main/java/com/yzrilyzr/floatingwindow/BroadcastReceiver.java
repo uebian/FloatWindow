@@ -8,9 +8,8 @@ public class BroadcastReceiver extends BroadcastReceiver
     @Override
     public void onReceive(Context p1, Intent p2)
     {
-        Intent in=new Intent(p1,MainService.class);
-        in.putExtra(IData.TAG,IData.SETTINGS);
-        p1.startService(in);
+		p1.stopService(new Intent(p1,PluginService.class));
+        System.exit(0);
     }
     
 }

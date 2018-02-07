@@ -1,15 +1,15 @@
 package com.yzrilyzr.ui;
-import android.widget.*;
-import android.content.*;
-import android.util.*;
-import android.view.*;
-import android.app.*;
-import android.graphics.*;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 
 public class myViewPager extends HorizontalScrollView
 {
-	private int screenWidth=0;
-	private int curScreen=0;
+	private int screenWidth=0,curScreen=0;
+	private float lastx;
 	private LinearLayout ll;
 	private OnPageChangeListener lis=null;
 	public myViewPager(Context context)
@@ -68,19 +68,31 @@ public class myViewPager extends HorizontalScrollView
 	{
 		// TODO: Implement this method
 		//getParent().requestDisallowInterceptTouchEvent(true);
-		if(ev.getAction()==MotionEvent.ACTION_UP)
+		switch(ev.getAction())
 		{
-			int l=(getScrollX()+screenWidth/2)/screenWidth;
-			if(lis!=null)lis.onPageChanged(curScreen,l);
-			smoothScrollTo((curScreen=l)*screenWidth,0);
-			return true;
+			case MotionEvent.ACTION_DOWN:
+				lastx=ev.getX();
+				break;
+			case MotionEvent.ACTION_UP:
+				int l=curScreen;
+				float dx=lastx-ev.getX();
+				if(Math.abs(dx)>screenWidth/16)
+				{
+					if(dx<0)l--;
+					else l++;
+					if(lis!=null)lis.onPageChanged(curScreen,l);
+				}
+				smoothScrollTo((curScreen=l)*screenWidth,0);
+				return true;
 		}
 		return super.onTouchEvent(ev);
 	}
-	public void setOnPageChangedListener(OnPageChangeListener l){
+	public void setOnPageChangedListener(OnPageChangeListener l)
+	{
 		lis=l;
 	}
-	public interface OnPageChangeListener{
+	public interface OnPageChangeListener
+	{
 		public abstract void onPageChanged(int last,int newone);
 	}
 }

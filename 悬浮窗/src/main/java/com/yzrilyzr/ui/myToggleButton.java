@@ -1,19 +1,19 @@
 package com.yzrilyzr.ui;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import com.yzrilyzr.floatingwindow.R;
-import android.graphics.drawable.Drawable;
+import android.widget.ToggleButton;
+import android.graphics.Canvas;
+import android.graphics.RectF;
+import android.graphics.Rect;
 
-public class myButton extends Button implements myTouchProcessor.Event
+public class myToggleButton extends ToggleButton implements myTouchProcessor.Event
 {
 	private myTouchProcessor pr=new myTouchProcessor(this);
-	private myRippleDrawable mrd;
     private boolean useRound=false,color2Back=false;
-    public myButton(Context c,AttributeSet a)
+    private mDrawable mrd;
+    public myToggleButton(Context c,AttributeSet a)
     {
         super(c,a);
 		float radius=uidata.UI_RADIUS;
@@ -26,9 +26,9 @@ public class myButton extends Button implements myTouchProcessor.Event
 		setTextColor(color2Back?uidata.UI_TEXTCOLOR_BACK:uidata.UI_TEXTCOLOR_MAIN);
         if(uidata.UI_USETYPEFACE)setTypeface(uidata.UI_TYPEFACE);
         setTextSize(uidata.UI_TEXTSIZE_DEFAULT);
-        mrd=new myRippleDrawable(isEnabled()?(!color2Back?uidata.UI_COLOR_MAIN:uidata.UI_COLOR_BACK):0xffaaaaaa,radius);
+        mrd=new mDrawable(isEnabled()?(!color2Back?uidata.UI_COLOR_MAIN:uidata.UI_COLOR_BACK):0xffaaaaaa,radius);
         mrd.setLayer(this);
-        setBackground(mrd);
+        setBackgroundDrawable(mrd);
     }
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
@@ -44,11 +44,11 @@ public class myButton extends Button implements myTouchProcessor.Event
 		super.setEnabled(enabled);
 		mrd.setColor(enabled?(!color2Back?uidata.UI_COLOR_MAIN:uidata.UI_COLOR_BACK):0xffaaaaaa);
 	}
-	public myButton(Context c)
+    public myToggleButton(Context c)
     {
         this(c,null);
     }
-    @Override
+	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
 		if(pr.process(this,event))return true;
@@ -77,5 +77,26 @@ public class myButton extends Button implements myTouchProcessor.Event
 	{
 		mrd.longRipple(m.getX(),m.getY());
 		return false;
+	}
+	class mDrawable extends myRippleDrawable{
+		RectF bar;
+		public mDrawable(int color,float radius){
+			super(color,radius);
+		}
+		@Override
+		public void setBounds(int left, int top, int right, int bottom)
+		{
+			// TODO: Implement this method
+			super.setBounds(left, top, right, bottom);
+			bar=new RectF(rectF.left,rectF.bottom-rectF.height()/20f,rectF.right,rectF.bottom);
+		}
+		@Override
+		public void draw(Canvas canvas)
+		{
+			// TODO: Implement this method
+			super.draw(canvas);
+			paint2.setColor(isChecked()?0xffffffff:0xffaaaaaa);
+			canvas.drawRoundRect(bar,radius,radius,paint2);
+		}
 	}
 }

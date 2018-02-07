@@ -10,19 +10,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.yzrilyzr.FloatWindow.API;
+import android.view.SurfaceView;
+import android.view.SurfaceHolder.Callback;
+import android.view.SurfaceHolder;
 
-public class WaveView extends ImageView
+public class WaveView extends SurfaceView implements Callback
 {
     Paint g=new Paint();
     byte[] data;
     Path left=new Path(),right=new Path();
     float xx1=500,xx2=600;
-    boolean touch=false;
+    boolean touch=false,start=false;
     int selectLine=1;
     float gap=4;
-    public long deltaTime=0,lastTime=0;
-
 	private int lw=API.dip2px(6);
+	SurfaceHolder holder;
     public WaveView(Context c,AttributeSet a)
     {
         super(c,a);
@@ -30,24 +32,71 @@ public class WaveView extends ImageView
         //g.setStrokeWidth(1);
         g.setStrokeWidth(API.dip2px(2));
         g.setTextSize(45f);
+		holder=getHolder();
+		holder.addCallback(this);
     }
     public void prev()
     {
         if(selectLine==1)xx1-=gap;
         if(selectLine==2)xx2-=gap;
-
     }
     public void next()
     {
         if(selectLine==1)xx1+=gap;
         if(selectLine==2)xx2+=gap;
-
     }
 
-    @Override
-    protected void onDraw(Canvas canvas)
-    {
-        
+	@Override
+	public void surfaceDestroyed(SurfaceHolder p1)
+	{
+		stopRender();
+	}
+	@Override
+	public void surfaceCreated(SurfaceHolder p1)
+	{
+		startRender();
+	}
+	@Override
+	public void surfaceChanged(SurfaceHolder p1, int p2, int p3, int p4)
+	{
+		// TODO: Implement this method
+	}
+	private void startRender()
+	{
+		if(start)return;
+		start=true;
+		new Thread(){
+			@Override public void run()
+			{
+				while(start)
+				{
+					try
+					{
+						Canvas c=holder.lockCanvas();
+						if(c!=null)
+						{
+							mdraw(c);
+							holder.unlockCanvasAndPost(c);
+						}
+					}
+					catch(Throwable e)
+					{
+						try
+						{
+							Thread.sleep(20);
+						}
+						catch (InterruptedException e2)
+						{}
+					}
+				}
+			}
+		}.start();
+	}
+	private void stopRender(){
+		start=false;
+	}
+    private void mdraw(Canvas canvas)
+    {      
         try
         {
             if(data!=null)
@@ -72,12 +121,12 @@ public class WaveView extends ImageView
                 for(int i=0; i<data.length/4;i++)
                 {
                     x=i*gap;
-                    y=(data[i*4+1]*0x100+data[i*4])*hh/65536f;
+                    y=(data[i*4+1]*256+data[i*4])*hh/65536f;
                     if(i==0)left.moveTo(x,y+hah);
                     else left.lineTo(x,y+hah);
                     ly+=Math.abs(y);
                     canvas.drawPoint(x,y+hah,g);
-                    y=(data[i*4+3]*0x100+data[i*4+2])*hh/65536f;
+                    y=(data[i*4+3]*256+data[i*4+2])*hh/65536f;
                     if(i==0)right.moveTo(x,y+hah);
                     else right.lineTo(x,y+hah);
                     ry+=Math.abs(y);
@@ -94,13 +143,9 @@ public class WaveView extends ImageView
 				canvas.drawRect(ww-lw,hh-ry*8/data.length,ww,hh,g);
 				g.setStyle(Paint.Style.STROKE);
             }
-			if(deltaTime!=0)canvas.drawText("FPS:"+1000/deltaTime,0,g.getTextSize(),g);
         }
         catch(Throwable e)
         {canvas.drawText(e.toString(),0/2,50,g);}
-        deltaTime=System.currentTimeMillis()-lastTime;
-        lastTime=System.currentTimeMillis();
-		invalidate();
     }
     public void setData(byte[] d)
     {

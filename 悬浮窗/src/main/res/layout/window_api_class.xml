@@ -22,10 +22,10 @@
 			android:layout_margin="5dp"
 			android:id="@+id/windowapiclassmyLinearLayoutRipple1">
 
-			<ImageView
+			<com.yzrilyzr.icondesigner.VecView
 				android:layout_height="50dp"
 				android:layout_width="50dp"
-				android:src="@drawable/objects"
+				vec="objects"
 				android:scaleType="fitXY"/>
 
 			<com.yzrilyzr.ui.myTextView
@@ -44,10 +44,10 @@
 			android:onClick="clickEvent"
 			android:id="@+id/windowapiclassmyLinearLayoutRipple2">
 
-			<ImageView
+			<com.yzrilyzr.icondesigner.VecView
 				android:layout_height="50dp"
 				android:layout_width="50dp"
-				android:src="@drawable/objects"
+				vec="objects"
 				android:scaleType="fitXY"/>
 
 			<com.yzrilyzr.ui.myTextView
@@ -73,10 +73,10 @@
 			android:layout_margin="5dp"
 			android:id="@+id/windowapiclassmyLinearLayoutRipple3">
 
-			<ImageView
+			<com.yzrilyzr.icondesigner.VecView
 				android:layout_height="50dp"
 				android:layout_width="50dp"
-				android:src="@drawable/box_blue"
+				vec="box_blue"
 				android:scaleType="fitXY"/>
 
 			<com.yzrilyzr.ui.myTextView
@@ -95,10 +95,10 @@
 			android:onClick="clickEvent"
 			android:id="@+id/windowapiclassmyLinearLayoutRipple4">
 
-			<ImageView
+			<com.yzrilyzr.icondesigner.VecView
 				android:layout_height="50dp"
 				android:layout_width="50dp"
-				android:src="@drawable/box_red"
+				vec="box_red"
 				android:scaleType="fitXY"/>
 
 			<com.yzrilyzr.ui.myTextView

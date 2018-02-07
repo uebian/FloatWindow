@@ -8,10 +8,10 @@
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
 		title="New Activity"
-		src0="@drawable/icon"
+		vec0="floatingwindow"
 		tip0="CWUI Activity"
 		onClick1="menu"
-		src1="@drawable/menu_w"
+		vec1="icon"
 		tip1="菜单"
 		android:id="@+id/activitymainmyToolBar1"/>
 

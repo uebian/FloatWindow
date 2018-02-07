@@ -83,7 +83,23 @@ public class Main implements View.OnClickListener//SeekBar.OnSeekBarChangeListen
 		v=(ViewGroup) API.parseXmlViewFromFile(ctx,"com.yzrilyzr.AudioEdit","res/layout/play.xml");
 		API.invoke(window,"addView",v);
 		SeekBar seek_progress=(SeekBar) v.findViewById(R.id.playSeekBar1);
-		
+		seek_progress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+				@Override
+				public void onProgressChanged(SeekBar p1, int p2, boolean p3)
+				{
+					if(track.onSeek)track.seek(p2);
+				}
+				@Override
+				public void onStartTrackingTouch(SeekBar p1)
+				{
+					track.onSeek=true;
+				}
+				@Override
+				public void onStopTrackingTouch(SeekBar p1)
+				{
+					track.onSeek=false;
+				}
+			});
 		//===
 		String file=intent.getStringExtra("file");
 		track=new MusicPlayer(file,seek_progress,WaveView);

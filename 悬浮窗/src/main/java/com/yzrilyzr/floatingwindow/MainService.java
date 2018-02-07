@@ -44,21 +44,8 @@ public class MainService extends Service
     public int onStartCommand(Intent intent, int flags, int startId)
     {
         // TODO: Implement this method
-		Intent inte =new Intent(this,BroadcastReceiver.class);
-        PendingIntent pendingIntent =PendingIntent.getBroadcast(this,0,inte,0);
-        Notification.Builder builder1 = new Notification.Builder(this)
-            .setSmallIcon(R.drawable.icon) //设置图标
-            .setTicker("FloatWindow主服务已开始运行")
-            .setContentTitle("FloatWindow主服务正在运行")//设置标题
-            .setContentText("点击这里进行设置")//消息内容
-            .setSound(null)
-            .setVibrate(null)
-            .setAutoCancel(false)//打开程序后图标消失
-            .setContentIntent(pendingIntent)
-            .setLights(uidata.UI_COLOR_MAIN,500,2000);
-        Notification notification1 = builder1.build();
-        startForeground(1,notification1);
-        if(intent!=null)
+		
+        /*if(intent!=null)
         {
             switch(intent.getIntExtra(IData.TAG,0))
 			{
@@ -66,7 +53,7 @@ public class MainService extends Service
 				case IData.SETTINGS:showMenu();break;
 				case IData.START_PLUGIN:showStarterButton();break;
 			}
-        }
+        }*/
         return super.onStartCommand(intent, flags, startId);
     }
     @Override
@@ -76,81 +63,6 @@ public class MainService extends Service
         super.onDestroy();
         stopForeground(false);
     }
-    private void showStarterButton()
-    {
-        if(created)return;
-        created=true;
-        final int dd=util.px(40);
-        final Window x=new Window(ctx,dd,dd).show();
-        final Window xxx=new Window(ctx,-1,-1);
-        LinearLayout a =(LinearLayout)x.getMainView();
-        a.setBackground(null);
-        a.removeAllViews();
-        ImageView i=new ImageView(ctx);
-        i.setImageResource(R.drawable.main_icon);
-        final StarterView cv=new StarterView(ctx);
-        LinearLayout aa=(LinearLayout) xxx.getMainView();
-        aa.setOnTouchListener(null);
-        aa.setBackground(null);
-        aa.removeAllViews();
-        aa.addView(cv);
-        cv.setListener(new StarterView.listener(){
-                int code=-1;
-                @Override
-                public void onItemClick(int which)
-                {
-                    // TODO: Implement this method
-                    code=which;
-                }
-                @Override
-                public void onAnimEnd()
-                {
-                    // TODO: Implement this method
-                    xxx.dismiss();
-                    if(code==3)
-                    {
-                        showMenu();
-                    }
-                    if(code==4)
-                    {
-                        stopSelf();
-                        stopService(new Intent(ctx,PluginService.class));
-                        System.exit(0);
-                    }
-                    if(code==5)
-                    {
-                        showStartApp();
-                    }
-                }
-                @Override
-                public void onAnimStart()
-                {
-                    // TODO: Implement this method
-                    code=-1;
-                }
-            });
-        i.setOnTouchListener(new View.OnTouchListener(){
-                @Override
-                public boolean onTouch(View p1, MotionEvent p2)
-                {
-                    // TODO: Implement this method
-                    cv.setPosition(p2.getRawX(),p2.getRawY());
-                    x.moveableView(p1,p2);
-                    return false;
-                }
-            });
-        i.setOnClickListener(new OnClickListener(){
-                @Override
-                public void onClick(View p1)
-                {
-                    // TODO: Implement this method
-                    xxx.show();
-                    cv.toggle();
-                }
-            });
-        a.addView(i);
-    }
-
     @Override
     public void onCreate()
     {
@@ -159,100 +71,7 @@ public class MainService extends Service
         if(created)return;
         uidata.readData(this);
     }
-
-    private void start()
-    {
-        if(created)return;
-        //■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
-        //●●●●●●●●●●●●●●●●●●●●●●●●●●●
-        int wid,hei;
-        final Window w=new Window(ctx,wid=util.px(210),hei=util.px(260));
-        w.setPosition((uidata.SCREEN_WIDTH-wid)/2,(uidata.SCREEN_HEIGHT-hei)/2);
-        w.show()
-            .setCanResize(false);
-        LinearLayout v=(LinearLayout) w.getMainView();
-        v.removeAllViews();
-        v.setOnTouchListener(null);
-        v.setOrientation(1);
-        v.setGravity(Gravity.CENTER);
-        v.setBackground(new myRippleDrawable(uidata.UI_COLOR_BACK,uidata.UI_COLOR_BACK,uidata.UI_RADIUS));
-        myRoundDrawable rr=new myRoundDrawable(ctx,R.drawable.launch);
-        ImageView iv=new ImageView(ctx);
-        int ii=util.px(180);
-        iv.setImageDrawable(rr);
-        iv.setLayoutParams(new LinearLayout.LayoutParams(ii,ii));
-        v.addView(iv);
-        myTextViewTitleBack tv=new myTextViewTitleBack(ctx);
-        tv.setText("FloatWindow");
-        tv.setGravity(Gravity.CENTER);
-        v.addView(tv);
-        myLoadingView ml=new myLoadingView(ctx);
-        ii=util.px(40);
-        ml.setLayoutParams(new LinearLayout.LayoutParams(ii,ii));
-        v.addView(ml);
-        new Handler().postDelayed(new Runnable(){
-                @Override
-                public void run()
-                {
-                    // TODO: Implement this method
-                    w.dismiss();
-                    showStarterButton();
-                }
-            },500);
-    }
-    private void showMenu()
-    {
-        final Window w=new Window(ctx,-2,-2);
-        //ViewGroup bar=(ViewGroup) w.getMainView().getChildAt(1);
-        //for(int i=0;i<3;i++)
-        //bar.removeViewAt(2);
-        w.setBar(8,8,8,0).setIcon(R.drawable.menu_w);
-        View v=LayoutInflater.from(ctx).inflate(R.layout.window_menu,null);
-        OnClickListener ocl=new OnClickListener(){
-            @Override
-            public void onClick(View p1)
-            {
-                // TODO: Implement this method
-                switch(p1.getId())
-                {
-                    case R.id.windowcontrolpanelmyLinearLayoutRound1:
-                        showSystemStatus();
-                        break;
-                    case R.id.windowcontrolpanelmyLinearLayoutRound2:
-                        showAPIsearch();
-                        break;
-                    case R.id.windowcontrolpanelmyLinearLayoutRound3:
-                        showSystemStatus();
-                        break;
-                    case R.id.windowcontrolpanelmyLinearLayoutRound4:
-                        showHelp();
-                        break;
-                    case R.id.windowcontrolpanelmyLinearLayoutRound5:
-                        showAbout();
-                        break;
-                    case R.id.windowcontrolpanelmyLinearLayoutRound6:
-                        stopSelf();
-                        stopService(new Intent(ctx,PluginService.class));
-                        System.exit(0);
-                        break;
-                }
-            }
-        };
-        v.findViewById(R.id.windowcontrolpanelmyLinearLayoutRound1).setOnClickListener(ocl);
-        v.findViewById(R.id.windowcontrolpanelmyLinearLayoutRound2).setOnClickListener(ocl);
-        v.findViewById(R.id.windowcontrolpanelmyLinearLayoutRound3).setOnClickListener(ocl);
-        v.findViewById(R.id.windowcontrolpanelmyLinearLayoutRound4).setOnClickListener(ocl);
-        v.findViewById(R.id.windowcontrolpanelmyLinearLayoutRound5).setOnClickListener(ocl);
-        v.findViewById(R.id.windowcontrolpanelmyLinearLayoutRound6).setOnClickListener(ocl);
-
-
-        w.addView(v)
-            .setTitle("菜单")
-            .setCanResize(false)
-            .show();
-    }
-
+/*
     private void showSystemStatus()
     {
         Window w=new Window(ctx,-2,-2)
@@ -362,7 +181,7 @@ public class MainService extends Service
         myButton mb=new myButton(ctx);
         w.addView(met);
         w.addView(mb);
-        met.setText("com.yzrilyzr.FloatWindow.API");
+        met.setText("com.yzrilyzr.floatingwindow.api.API");
         mb.setText("查询");
         mb.setOnClickListener(new OnClickListener(){
                 @Override
@@ -519,9 +338,9 @@ public class MainService extends Service
 
          }
          }
-         });*/
+         });
 
-    }
+    }*//*
     private String append(String a,String s)
 	{
         return a+"\n"+s;
@@ -544,7 +363,7 @@ public class MainService extends Service
             .setBar(8,8,8,0)
             .setIcon(R.drawable.info)
             .setCanResize(false)
-            .setMessage("FloatWindow 悬浮窗\n支持载入插件 多窗口 多任务\n可更换主题颜色 字体 组件样式\n具有更高的安全性\n提供开放的插件API\n…\n\n使用未知插件带来的问题\n由插件作者负责\n本程序作者不承担任何责任\n\n如有问题，请联系作者\n作者:yzrilyzr(QQ1303895279)")
+            .setMessage("FloatingWindow 悬浮窗\n支持载入插件 多窗口 多任务\n可更换主题颜色 字体 组件样式\n具有更高的安全性\n提供开放的插件API\n…\n\n使用未知插件带来的问题\n由插件作者负责\n本程序作者不承担任何责任\n\n如有问题，请联系作者\n作者:yzrilyzr(QQ1303895279)")
             .show();
     }
     private void showStartApp()
@@ -629,6 +448,6 @@ public class MainService extends Service
                 }
             });
     }
-
+*/
 
 }

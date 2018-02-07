@@ -1,4 +1,6 @@
 package com.yzrilyzr.floatingwindow;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -6,16 +8,15 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.IBinder;
 import android.widget.ScrollView;
-import com.yzrilyzr.floatingwindow.api.API;
 import com.yzrilyzr.myclass.util;
 import com.yzrilyzr.ui.myTextView;
 import com.yzrilyzr.ui.myTextViewBack;
 import com.yzrilyzr.ui.uidata;
 import dalvik.system.PathClassLoader;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import com.yzrilyzr.ui.myToast;
 
 public class PluginService extends android.app.Service
 {
@@ -24,8 +25,20 @@ public class PluginService extends android.app.Service
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        // TODO: Implement this method
-        startForeground(0,null);
+		Intent inte =new Intent(this,BroadcastReceiver.class);
+        PendingIntent pendingIntent =PendingIntent.getBroadcast(this,0,inte,0);
+        Notification.Builder builder1 = new Notification.Builder(this)
+            .setSmallIcon(R.drawable.icon) //设置图标
+            .setTicker("悬浮窗主服务已开始运行")
+            .setContentTitle("悬浮窗主服务正在运行")//设置标题
+            .setContentText("点击这里停止运行")//消息内容
+            .setSound(null)
+            .setVibrate(null)
+            .setAutoCancel(false)//打开程序后图标消失
+            .setContentIntent(pendingIntent)
+            .setLights(uidata.UI_COLOR_MAIN,500,2000);
+        Notification notification1 = builder1.build();
+        startForeground(1,notification1);
         if(intent!=null)
             loadPlugin(ctx,intent);
         invokePlugin("onStartCommand",intent,flags,startId);
@@ -48,36 +61,28 @@ public class PluginService extends android.app.Service
             }
             pkg=intent.getStringExtra("pkg");
             String clazz=intent.getStringExtra("class");
-            String apiclz="com.yzrilyzr.floatingwindow.api.API";
-            String path=ctx.getPackageManager().getPackageInfo(pkg,PackageInfo.INSTALL_LOCATION_AUTO).applicationInfo.publicSourceDir;
+            String path=PackageManager.getPackageInfo(pkg,PackageInfo.INSTALL_LOCATION_AUTO).applicationInfo.publicSourceDir;
             ClassLoader mainloader=ctx.getClassLoader();
-            Class c=null,api=null;
+            Class c=null;
             try
             {
                 c=mainloader.loadClass(clazz);
-                api=mainloader.loadClass(apiclz);
             }
             catch(Throwable e)
             {
                 PathClassLoader pcl=new PathClassLoader(path,mainloader);
                 c=pcl.loadClass(clazz);
-                api=pcl.loadClass(apiclz);
             }
-            int ver=api.getField("API_VERSION").getInt(api);
-            if(ver<API.API_VERSION)util.toast(ctx,"插件API版本太低，可能会影响使用(插件:"+ver+"，本程序:"+API.API_VERSION+")\n请报告插件作者请求更新");
-            Constructor con=c.getDeclaredConstructor(Context.class,Intent.class);
-            con.setAccessible(true);
-            Object o=con.newInstance(ctx,intent);
+            Object o=c.getConstructor(Context.class,Intent.class).newInstance(ctx,intent);
             pluginObject.add(o);
-            //toast("插件:"+pkg+" 载入完毕");
+			myToast.s(ctx,"插件已载入");
         }
         catch(Throwable e)
         {
-            System.out.println(e);
             String pkginfo="";
             try
             {
-                PackageManager.getPackageInfo(pkg,PackageInfo.INSTALL_LOCATION_AUTO).applicationInfo.loadLabel(PackageManager);
+                pkginfo=PackageManager.getPackageInfo(pkg,PackageInfo.INSTALL_LOCATION_AUTO).applicationInfo.loadLabel(PackageManager)+"";
             }
             catch (PackageManager.NameNotFoundException e2)
             {
@@ -86,6 +91,7 @@ public class PluginService extends android.app.Service
             myTextView mtv=new myTextViewBack(ctx);
             mtv.setText("插件:"+pkginfo+"("+pkg+")\n\nstacktrace:\n"+handleException(e));
             mtv.setSelectAllOnFocus(true);
+			mtv.setTextSize(util.px(3));
             ScrollView sv=new ScrollView(ctx);
             sv.addView(mtv);
             new Window(ctx,util.px(300),util.px(200))
@@ -139,9 +145,9 @@ public class PluginService extends android.app.Service
         super.onCreate();
         uidata.isInit=true;
         uidata.readData(ctx);
-        Intent i=new Intent(this,MainService.class);
+        /*Intent i=new Intent(this,MainService.class);
         i.putExtra("IData","pluginStart");
-        startService(i);
+        startService(i);*/
         invokePlugin("onCreate");
     }
     @Override
@@ -200,5 +206,4 @@ public class PluginService extends android.app.Service
         super.onConfigurationChanged(newConfig);
         invokePlugin("onConfigurationChanged",newConfig);
     }
-
 }

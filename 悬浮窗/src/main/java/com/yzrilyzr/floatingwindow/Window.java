@@ -4,9 +4,8 @@ import android.view.*;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import com.yzrilyzr.floatingwindow.api.API;
+import com.yzrilyzr.icondesigner.VecView;
 import com.yzrilyzr.myclass.util;
 import com.yzrilyzr.ui.myTextView;
 import com.yzrilyzr.ui.myTextViewBack;
@@ -17,11 +16,11 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     private WindowManager window;
     private WindowManager.LayoutParams windowParam,minParam;
     private ViewGroup winView,contentView,titleBar;
-    private ImageView icon;
+    private VecView icon;
     private myTextView title;
     private touchPoint touchPoint=touchPoint.NULL;
     private boolean focusable=false,maxwin=false,minwin=false;
-    private ImageView buttonFocusWin,buttonMinWin,buttonMaxWin,buttonCloseWin,minButton;
+    private VecView buttonFocusWin,buttonMinWin,buttonMaxWin,buttonCloseWin,minButton;
     private float OutLineWidth;
     private int width=-2,height=-2;
     private WindowInterface inter;
@@ -42,12 +41,12 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
         );
         windowParam.gravity=Gravity.LEFT|Gravity.TOP;
         winView=(ViewGroup) LayoutInflater.from(ctx).inflate(R.layout.window_main,null);
-        icon=(ImageView) winView.findViewById(R.id.mainwindowImageView1);
+        icon=(VecView) winView.findViewById(R.id.mainwindowImageView1);
         title=(myTextView) winView.findViewById(R.id.mainwindowTextView1);
-        buttonFocusWin=(ImageView) winView.findViewById(R.id.mainwindowButton1);
-        buttonMinWin=(ImageView) winView.findViewById(R.id.mainwindowButton2);
-        buttonMaxWin=(ImageView) winView.findViewById(R.id.mainwindowButton3);
-        buttonCloseWin=(ImageView) winView.findViewById(R.id.mainwindowButton4);
+        buttonFocusWin=(VecView) winView.findViewById(R.id.mainwindowButton1);
+        buttonMinWin=(VecView) winView.findViewById(R.id.mainwindowButton2);
+        buttonMaxWin=(VecView) winView.findViewById(R.id.mainwindowButton3);
+        buttonCloseWin=(VecView) winView.findViewById(R.id.mainwindowButton4);
         buttonFocusWin.setOnClickListener(this);
         buttonFocusWin.setOnLongClickListener(this);
         buttonMinWin.setOnClickListener(this);
@@ -60,7 +59,7 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
         buttonMinWin.setOnTouchListener(null);
         buttonMaxWin.setOnTouchListener(null);
         buttonCloseWin.setOnTouchListener(null);
-        minButton=(ImageView) winView.getChildAt(0);
+        minButton=(VecView) winView.getChildAt(0);
         minButton.setOnClickListener(this);
         minButton.setOnTouchListener(this);
         titleBar=(ViewGroup) winView.getChildAt(1);
@@ -124,20 +123,30 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     }
     public Window setIcon(Drawable b)
     {
+        icon.setImageVec(null);
         icon.setImageDrawable(b);
-        minButton.setImageDrawable(b);
+		minButton.setImageVec(null);
+		minButton.setImageDrawable(b);
         return this;
     }
     public Window setIcon(int b)
     {
+        icon.setImageVec(null);
         icon.setImageResource(b);
+		minButton.setImageVec(null);
         minButton.setImageResource(b);
         return this;
     }
+	public Window setIcon(String vecAsset)
+	{
+		icon.setImageVec(vecAsset);
+		minButton.setImageVec(vecAsset);
+		return this;
+	}
     public Window setFocusable(boolean f)
     {
         windowParam.flags=f?windowParam.FLAG_NOT_TOUCH_MODAL:windowParam.FLAG_NOT_FOCUSABLE;
-        buttonFocusWin.setImageResource(f?R.drawable.focusable:R.drawable.unfocusable);
+        buttonFocusWin.setImageVec(f?"focusedwin":"unfocusedwin");
         window.updateViewLayout(winView,windowParam);
         return this;
     }
@@ -189,7 +198,7 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     {
         windowParam.width=b?-1:width;
         windowParam.height=b?-1:height;
-        buttonMaxWin.setImageResource(b?R.drawable.restore:R.drawable.max);
+        buttonMaxWin.setImageVec(b?"restorewin":"maxwin");
         window.updateViewLayout(winView,windowParam);
         return this;
     }

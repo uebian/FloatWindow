@@ -90,7 +90,7 @@ public class PluginActivity extends myActivity
         {
             pkg=intent.getStringExtra("pkg");
             String clazz=intent.getStringExtra("class");
-            String apiclz="com.yzrilyzr.FloatWindow.API";
+            String apiclz="com.yzrilyzr.floatingwindow.api.API";
             String path=ctx.getPackageManager().getPackageInfo(pkg,PackageInfo.INSTALL_LOCATION_AUTO).applicationInfo.publicSourceDir;
             ClassLoader mainloader=ctx.getClassLoader();
             Class c=null,api=null;
@@ -106,7 +106,6 @@ public class PluginActivity extends myActivity
                 api=pcl.loadClass(apiclz);
             }
             int ver=api.getField("API_VERSION").getInt(api);
-            if(ver<API.API_VERSION)util.toast(ctx,"插件API版本太低，可能会影响使用(插件:"+ver+"，本程序:"+API.API_VERSION+")\n请报告插件作者请求更新");
             Constructor con=c.getDeclaredConstructor(Context.class,Intent.class);
             con.setAccessible(true);
             obj=con.newInstance(ctx,intent);

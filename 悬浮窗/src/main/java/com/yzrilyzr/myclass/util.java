@@ -16,21 +16,18 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.yzrilyzr.floatingwindow.R;
-import com.yzrilyzr.ui.myAlertDialog;
-import com.yzrilyzr.ui.myDialogInterface;
+import com.yzrilyzr.ui.myDialog;
+import com.yzrilyzr.ui.myToast;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -63,18 +60,13 @@ public final class util
 				}
 			});
 	}
-    public static void toast(final Context c,final String s)
+    public static void toast(final Context c,final Object s)
     {
 		new Handler(c.getMainLooper()).post(new Runnable(){
 				@Override
 				public void run()
 				{
-					Toast t=new Toast(c);
-					ViewGroup v=(ViewGroup) LayoutInflater.from(c).inflate(R.layout.layout_toast,null);
-					t.setView(v);
-					((TextView)v.getChildAt(0)).setText(s);
-					t.show();
-					
+					myToast.makeText(c,s+"",0).show();
 				}
 			});
     }
@@ -86,7 +78,7 @@ public final class util
 				public void run()
 				{
 					// TODO: Implement this method
-					new myAlertDialog(c)
+					/*new myDialog(c)
 						.setTitle("提示")
 						.setMessage(s)
 						.setPositiveButton("确定",null)
@@ -96,7 +88,7 @@ public final class util
 								copy(c,s);
 							}
 						})
-						.show();
+						.show();*/
 				}
 			
 	});
@@ -411,7 +403,14 @@ public final class util
         Rect rect = new Rect(0, 0, displayMetric.widthPixels, displayMetric.heightPixels);
         return rect;
     }
-
+	public static void scanMedia(Context ctx,String... paths){
+		MediaScannerConnection.scanFile(ctx,paths, null,new MediaScannerConnection.OnScanCompletedListener() {
+				@Override
+				public void onScanCompleted(String path, Uri uri)
+				{
+				}
+			});
+	}
     public static int getScreenWidth()
     {
         return getScreenRect().width();
@@ -426,6 +425,7 @@ public final class util
     {
         return (int)Math.floor(Math.random()*(max-min))+min;
     }
-
-
+	public static float limit(float x,float min,float max){
+		return Math.max(Math.min(x,max),min);
+	}
 }

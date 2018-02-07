@@ -6,18 +6,18 @@
 	android:orientation="horizontal"
 	android:gravity="center">
 
-	<TextView
+	<com.yzrilyzr.ui.myTextViewBack
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:id="@+id/lseekedittxtTextView1"/>
 
-	<SeekBar
+	<com.yzrilyzr.ui.mySeekBar
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:layout_weight="1.0"
 		android:id="@+id/lseekedittxtSeekBar1"/>
 
-	<EditText
+	<com.yzrilyzr.ui.myEditText
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:typeface="monospace"

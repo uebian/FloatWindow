@@ -4,16 +4,16 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import com.yzrilyzr.myclass.util;
+import android.view.MotionEvent;
 
-public class myProgressBar extends ProgressBar
+public class myProgressBar extends SeekBar
 {
 	private Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);;
     public myProgressBar(Context c,AttributeSet a)
     {
         super(c,a);
-		setIndeterminate(false);
     }
     public myProgressBar(Context c)
     {
@@ -37,4 +37,10 @@ public class myProgressBar extends ProgressBar
     {
         setMeasuredDimension(WidgetUtils.measure(widthMeasureSpec,-2),WidgetUtils.measure(heightMeasureSpec,util.px(10)));
     }
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		return false;
+	}
 }

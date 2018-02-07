@@ -18,11 +18,11 @@
 			android:id="@+id/windowcontrolpanelmyLinearLayoutRound1"
 			android:layout_margin="5dp">
 
-			<ImageView
+			<com.yzrilyzr.icondesigner.VecView
 				android:layout_height="30dp"
 				android:layout_width="30dp"
 				android:layout_margin="5dp"
-				android:src="@drawable/settings"
+				
 				android:scaleType="fitXY"/>
 
 			<com.yzrilyzr.ui.myTextView
@@ -40,10 +40,9 @@
 			android:layout_margin="5dp"
 			android:id="@+id/windowcontrolpanelmyLinearLayoutRound2">
 
-			<ImageView
+			<com.yzrilyzr.icondesigner.VecView
 				android:layout_height="50dp"
 				android:layout_width="50dp"
-				android:src="@drawable/uiedit"
 				android:scaleType="fitXY"/>
 
 			<com.yzrilyzr.ui.myTextView
@@ -68,10 +67,9 @@
 			android:id="@+id/windowcontrolpanelmyLinearLayoutRound3"
 			android:layout_margin="5dp">
 
-			<ImageView
+			<com.yzrilyzr.icondesigner.VecView
 				android:layout_height="50dp"
 				android:layout_width="50dp"
-				android:src="@drawable/systeminfo"
 				android:scaleType="fitXY"/>
 
 			<com.yzrilyzr.ui.myTextView
@@ -89,10 +87,9 @@
 			android:layout_margin="5dp"
 			android:id="@+id/windowcontrolpanelmyLinearLayoutRound4">
 
-			<ImageView
+			<com.yzrilyzr.icondesigner.VecView
 				android:layout_height="50dp"
 				android:layout_width="50dp"
-				android:src="@drawable/help"
 				android:scaleType="fitXY"/>
 
 			<com.yzrilyzr.ui.myTextView
@@ -117,10 +114,9 @@
 			android:id="@+id/windowcontrolpanelmyLinearLayoutRound5"
 			android:layout_margin="5dp">
 
-			<ImageView
+			<com.yzrilyzr.icondesigner.VecView
 				android:layout_height="50dp"
 				android:layout_width="50dp"
-				android:src="@drawable/info"
 				android:scaleType="fitXY"/>
 
 			<com.yzrilyzr.ui.myTextView
@@ -138,10 +134,9 @@
 			android:layout_margin="5dp"
 			android:id="@+id/windowcontrolpanelmyLinearLayoutRound6">
 
-			<ImageView
+			<com.yzrilyzr.icondesigner.VecView
 				android:layout_height="50dp"
 				android:layout_width="50dp"
-				android:src="@drawable/exit_w"
 				android:scaleType="fitXY"/>
 
 			<com.yzrilyzr.ui.myTextView

@@ -10,26 +10,24 @@ import java.io.InputStream;
 import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 
-public class API_
+public class API
 {
     public static Intent intent=new Intent();
-    public static final String WINDOW_CLASS="com.yzrilyzr.FloatWindow.Window";
-    public static final int API_VERSION=1;
+    public static final String WINDOW_CLASS="com.yzrilyzr.floatingwindow.Window";
+    public static final int API_VERSION=2;
     public static void startMainService(Context ctx,String targetClass)
     {
         intent.setAction("com.yzrilyzr.Service");
+        intent.setPackage("com.yzrilyzr.floatingwindow");
         intent.putExtra("pkg",ctx.getPackageName());
         intent.putExtra("class",targetClass);
-        Intent i2=new Intent(createExplicitFromImplicitIntent(ctx,intent));
-        ctx.startService(i2);
+        //Intent i2=new Intent(createExplicitFromImplicitIntent(ctx,intent));
+        ctx.startService(intent);
     }
     public static void startMainActivity(Context ctx,String targetClass)
     {
-        intent.setAction("com.yzrilyzr.Activity");
-        intent.putExtra("pkg",ctx.getPackageName());
-        intent.putExtra("class",targetClass);
-        Intent i2=new Intent(createExplicitFromImplicitIntent(ctx,intent));
-        ctx.startService(i2);
+        intent.putExtra("IDATA","ACTIVITY");
+        startMainService(ctx,targetClass);
     }
     public static InputStream getPkgFile(Context ctx,String pkgName,String file) 
     {
@@ -134,7 +132,7 @@ public class API_
         {System.out.println(e);}
         return null;
     }
-    public static Object invoke(Object o,String name,Class[] paramType,Object[] param) 
+    public static Object invoke(Object o,String name,Class[] paramType,Object... param) 
     {
         try
         {

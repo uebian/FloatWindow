@@ -24,6 +24,7 @@ public class MusicPlayer
 	private SeekBar seek_progress;
 	//private RandomAccessFile raf;
 	private boolean isPlay=false;
+	boolean onSeek=false;
 	private Context ctx;
 	private AudioTrack track;
 	private WaveView WaveView;
@@ -53,7 +54,7 @@ public class MusicPlayer
 			@Override
 			public void run()
 			{
-				seek_progress.setProgress((int)wsp.getFilePointer());
+				if(!onSeek)seek_progress.setProgress((int)wsp.getFilePointer());
 			}
 		};
 		uiHandler=new Handler(ctx.getMainLooper());
@@ -152,6 +153,9 @@ public class MusicPlayer
 	{
 		TEST_SR=i;
 		track.setPlaybackRate(i);
+	}
+	public long length(){
+		return wsp.length();
 	}
 	public void seek(int p)
 	{

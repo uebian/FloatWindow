@@ -20,11 +20,11 @@ public class StarterView extends View
     private float kx,ky;
     private listener listener;
     private Bitmap b1,b2,b3,b4,b5,b6;
-	private long deltatime=0;
     private float l=0;
     private float t=0;
     private float r=0;
     private float b=0;
+	private static final float arc=(float)(Math.PI/180f);
 	private int SEL=-1;
 	private String[] tip=new String[]{"添加程序","添加程序","添加程序","菜单","退出"};
     public StarterView(Context c)
@@ -38,12 +38,12 @@ public class StarterView extends View
         setLayerType(View.LAYER_TYPE_SOFTWARE,null);
         dd=util.px(50);
         ee=util.px(40);
-        b1=scale(resBit(R.drawable.add));
-        b2=scale(resBit(R.drawable.add));
-        b3=scale(resBit(R.drawable.add));
-        b4=scale(resBit(R.drawable.menu));
-        b5=scale(resBit(R.drawable.exit));
-        b6=scale(resBit(R.drawable.start));
+        /*b1=scale(resBit(R.drawable.add));
+		 b2=scale(resBit(R.drawable.add));
+		 b3=scale(resBit(R.drawable.add));
+		 b4=scale(resBit(R.drawable.menu));
+		 b5=scale(resBit(R.drawable.exit));
+		 b6=scale(resBit(R.drawable.start));*/
 		paint.setTextSize(util.px(18));
     }
     private Bitmap resBit(int id)
@@ -105,77 +105,70 @@ public class StarterView extends View
     @Override
     protected void onDraw(Canvas canvas)
     {
-        // TODO: Implement this method
-        try
-        {
-            paint.setColor(uidata.UI_COLOR_BACK);
-			paint.setShadowLayer(margin,0,margin/3,0x88666666);
-            canvas.drawArc(new RectF(l,t,r,b),-180,Math.min(progress,225),true,paint);
-			paint.setColor(uidata.UI_COLOR_MAIN);
-			if(SEL>=0&&SEL<=4&&!isAnim&&progress>=360)canvas.drawArc(new RectF(l,t,r,b),-180+SEL*45,45,true,paint);
-            if(progress>225)
-            {
-                canvas.drawCircle(kx,ky,dd*((float)progress-225f)/180f,paint);
-            }
-            float R2=4f/3f*dd;
-            float arc=(float)(Math.PI/180f);
-			paint.setShadowLayer(0,0,0,0);
-            if(progress>=45)
-            {
-                canvas.drawBitmap(b1,(float)(kx-Math.cos(arc*22.5)*R2)-ee/2,(float)(ky-Math.sin(arc*22.5)*R2)-ee/2,paint);
-            }
-            if(progress>=90)
-            {
-                canvas.drawBitmap(b2,(float)(kx-Math.cos(arc*67.5)*R2)-ee/2,(float)(ky-Math.sin(arc*67.5)*R2)-ee/2,paint);
-            }
-            if(progress>=135)
-            {
-                canvas.drawBitmap(b3,(float)(kx-Math.cos(arc*112.5)*R2)-ee/2,(float)(ky-Math.sin(arc*112.5)*R2)-ee/2,paint);
-            }
-            if(progress>=180)
-            {
-                canvas.drawBitmap(b4,(float)(kx-Math.cos(arc*157.5)*R2)-ee/2,(float)(ky-Math.sin(arc*157.5)*R2)-ee/2,paint);
-            }
-            if(progress>=225)
-            {
-                canvas.drawBitmap(b5,(float)(kx-Math.cos(arc*202.5)*R2)-ee/2,(float)(ky-Math.sin(arc*202.5)*R2)-ee/2,paint);
-            }
-            if(progress>=360)
-            {
-                if(SEL<0||SEL>=tip.length)canvas.drawBitmap(b6,kx-ee/2,ky-ee/2,paint);
-				else{
-					float a=paint.measureText(tip[SEL]);
-					paint.setColor(uidata.UI_TEXTCOLOR_MAIN);
-					canvas.drawText(tip[SEL],kx-a/2,ky+paint.getTextSize()/2.5f,paint);
-				}
-            }
-            if(isAnim)
-            {
-                if(progress<360&&open)
-                {
-                    progress+=(25);inv();
-                }
-                else if(progress>0&&!open)
-                {
-                    progress-=25;inv();
-                }
-                if(progress<=0)
-                {
-                    isAnim=false;
-					progress=0;
-                    if(listener!=null)listener.onAnimEnd();
-                }
-                else if(progress>=360){
-					progress=360;
-					isAnim=false;
-					}
-            }
-			System.out.println(deltatime);
-        }
-        catch(Throwable e)
-        {
-            Toast.makeText(getContext(),e+"",0).show();
-        }
+        // TODO: Implement this metho
+		paint.setColor(uidata.UI_COLOR_BACK);
+		paint.setShadowLayer(margin,0,margin/3,0x88666666);
+		canvas.drawArc(new RectF(l,t,r,b),-180,Math.min(progress,225),true,paint);
+		paint.setColor(uidata.UI_COLOR_MAIN);
+		if(SEL>=0&&SEL<=4&&!isAnim&&progress>=360)canvas.drawArc(new RectF(l,t,r,b),-180+SEL*45,45,true,paint);
+		if(progress>225)
+		{
+			canvas.drawCircle(kx,ky,dd*((float)progress-225f)/180f,paint);
+		}
+		float R2=4f/3f*dd;
+		paint.setShadowLayer(0,0,0,0);
+		if(progress>=45)
+		{
+			canvas.drawBitmap(b1,(float)(kx-Math.cos(arc*22.5)*R2)-ee/2,(float)(ky-Math.sin(arc*22.5)*R2)-ee/2,paint);
+		}
+		if(progress>=90)
+		{
+			canvas.drawBitmap(b2,(float)(kx-Math.cos(arc*67.5)*R2)-ee/2,(float)(ky-Math.sin(arc*67.5)*R2)-ee/2,paint);
+		}
+		if(progress>=135)
+		{
+			canvas.drawBitmap(b3,(float)(kx-Math.cos(arc*112.5)*R2)-ee/2,(float)(ky-Math.sin(arc*112.5)*R2)-ee/2,paint);
+		}
+		if(progress>=180)
+		{
+			canvas.drawBitmap(b4,(float)(kx-Math.cos(arc*157.5)*R2)-ee/2,(float)(ky-Math.sin(arc*157.5)*R2)-ee/2,paint);
+		}
+		if(progress>=225)
+		{
+			canvas.drawBitmap(b5,(float)(kx-Math.cos(arc*202.5)*R2)-ee/2,(float)(ky-Math.sin(arc*202.5)*R2)-ee/2,paint);
+		}
+		if(progress>=360)
+		{
+			if(SEL<0||SEL>=tip.length)canvas.drawBitmap(b6,kx-ee/2,ky-ee/2,paint);
+			else
+			{
+				float a=paint.measureText(tip[SEL]);
+				paint.setColor(uidata.UI_TEXTCOLOR_MAIN);
+				canvas.drawText(tip[SEL],kx-a/2,ky+paint.getTextSize()/2.5f,paint);
+			}
+		}
+		if(isAnim)
+		{
+			if(progress<360&&open)
+			{
+				progress+=(25);inv();
+			}
+			else if(progress>0&&!open)
+			{
+				progress-=25;inv();
+			}
+			if(progress<=0)
+			{
+				isAnim=false;
+				progress=0;
+				if(listener!=null)listener.onAnimEnd();
+			}
+			else if(progress>=360)
+			{
+				progress=360;
+				isAnim=false;
+			}
+		}
     }
     public interface listener
     {

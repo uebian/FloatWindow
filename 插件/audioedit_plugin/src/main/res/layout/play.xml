@@ -12,13 +12,13 @@
 		android:orientation="horizontal"
 		android:gravity="center">
 
-		<Button
+		<com.yzrilyzr.ui.myButton
 			android:layout_height="wrap_content"
 			android:text="暂停"
 			android:layout_width="wrap_content"
 			android:id="@+id/playButton1"/>
 
-		<Button
+		<com.yzrilyzr.ui.myButton
 			android:layout_height="wrap_content"
 			android:text="重置"
 			android:layout_width="wrap_content"
@@ -37,19 +37,19 @@
 		android:layout_width="wrap_content"
 		android:orientation="horizontal">
 
-		<Button
+		<com.yzrilyzr.ui.myButton
 			android:layout_height="wrap_content"
 			android:text="波形"
 			android:layout_width="wrap_content"
 			android:id="@+id/playButton4"/>
 
-		<Button
+		<com.yzrilyzr.ui.myButton
 			android:layout_height="wrap_content"
 			android:text="音轨"
 			android:layout_width="wrap_content"
 			android:id="@+id/playButton5"/>
 
-		<Button
+		<com.yzrilyzr.ui.myButton
 			android:layout_height="wrap_content"
 			android:text="控制"
 			android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
 		android:layout_width="match_parent"
 		android:orientation="horizontal">
 
-		<CheckBox
+		<com.yzrilyzr.ui.myCheckBox
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			android:id="@+id/playCheckBox1"/>
@@ -75,12 +75,12 @@
 		android:orientation="horizontal"
 		android:gravity="center">
 
-		<TextView
+		<com.yzrilyzr.ui.myTextViewBack
 			android:layout_height="wrap_content"
 			android:text="进度"
 			android:layout_width="wrap_content"/>
 
-		<SeekBar
+		<com.yzrilyzr.ui.mySeekBar
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			android:id="@+id/playSeekBar1"

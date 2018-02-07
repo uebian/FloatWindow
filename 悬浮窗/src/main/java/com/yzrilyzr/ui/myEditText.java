@@ -1,17 +1,19 @@
 package com.yzrilyzr.ui;
-import android.content.*;
-import android.util.*;
-import android.content.res.*;
-import android.graphics.*;
-import android.view.*;
-import android.app.*;
-import android.text.*;
-import java.text.*;
-import java.util.*;
-import android.graphics.drawable.*;
-import com.yzrilyzr.myclass.*;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.text.Editable;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.EditText;
+import com.yzrilyzr.myclass.util;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class myEditText extends android.widget.EditText implements android.view.View.OnLongClickListener
+public class myEditText extends EditText implements View.OnLongClickListener
 {
 	private Context ctx;
 	protected boolean selected=false;
@@ -46,11 +48,11 @@ public class myEditText extends android.widget.EditText implements android.view.
 	public boolean onLongClick(View p1)
 	{
 		// TODO: Implement this method
-		new myAlertDialog(ctx).setItems((selected=(start=this.getSelectionStart())==(end=this.getSelectionEnd()))?
+		/*new myDialog(ctx).setItems((selected=(start=this.getSelectionStart())==(end=this.getSelectionEnd()))?
 			("全选,粘贴,跳转到开头,跳转到结尾,插入时间,字数统计").split(","):
 			("全选,剪切,复制,粘贴,重复选中的文本,转为大写,转为小写,首字母大写,跳转到开头,跳转到结尾,插入时间,字数统计").split(","),
 			new myDialogInterface(){@Override public void click(View p,int t)
-				{clicki(p,t);}}).show();
+				{clicki(p,t);}}).show();*/
 		return true;
 	}
 	private class drawable extends Drawable
@@ -66,13 +68,11 @@ public class myEditText extends android.widget.EditText implements android.view.
 		public void draw(Canvas canvas)
 		{
 			// TODO: Implement this method
-
 			i=util.px(1);
 			p.setColor(b?uidata.UI_COLOR_MAIN:0xffaaaaaa);
 			if(b)i=util.px(2);
 			p.setStrokeWidth(i);
 			canvas.drawLine(i,h-i,w-i,h-i,p);
-
 		}
 		public void setFocus(boolean f)
 		{

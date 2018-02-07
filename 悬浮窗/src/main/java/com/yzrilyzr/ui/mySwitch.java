@@ -18,14 +18,12 @@ public class mySwitch extends Switch
     private boolean isChecked=false,isOn=false,last=false;
     private OnCheckedChangeListener occl=null;
 */
-    private Paint paint;
+    private Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);
     public mySwitch(Context c,AttributeSet a)
     {
         super(c,a);
         //if(a!=null)method=a.getAttributeValue(null,"onClick");
        // ctx=c;
-        paint=new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setStyle(Paint.Style.FILL);
     }
     public mySwitch(Context c)
     {

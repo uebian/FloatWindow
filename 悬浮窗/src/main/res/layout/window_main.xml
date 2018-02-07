@@ -5,9 +5,10 @@
 	android:layout_width="match_parent"
 	android:orientation="vertical">
 
-	<ImageView
+	<com.yzrilyzr.icondesigner.VecView
 		android:layout_height="30dp"
 		android:layout_width="30dp"
+		vec="floatingwindow"
 		android:id="@+id/mainwindowButton5"
 		android:visibility="gone"/>
 
@@ -17,11 +18,11 @@
 		android:orientation="horizontal"
 		android:gravity="center">
 
-		<ImageView
+		<com.yzrilyzr.icondesigner.VecView
 			android:layout_height="30dp"
 			android:layout_width="30dp"
 			android:layout_margin="2dp"
-			android:src="@drawable/icon"
+			vec="floatingwindow"
 			android:id="@+id/mainwindowImageView1"/>
 
 		<com.yzrilyzr.ui.myTextView
@@ -34,26 +35,26 @@
 			android:singleLine="true"
 			android:ellipsize="end"/>
 
-		<ImageView
-			android:src="@drawable/unfocusable"
+		<com.yzrilyzr.icondesigner.VecView
+			vec="unfocusedwin"
 			android:layout_height="30dp"
 			android:layout_width="30dp"
 			android:id="@+id/mainwindowButton1"/>
 
-		<ImageView
-			android:src="@drawable/min"
+		<com.yzrilyzr.icondesigner.VecView
+			vec="minwin"
 			android:layout_height="30dp"
 			android:layout_width="30dp"
 			android:id="@+id/mainwindowButton2"/>
 
-		<ImageView
-			android:src="@drawable/max"
+		<com.yzrilyzr.icondesigner.VecView
+			vec="maxwin"
 			android:layout_height="30dp"
 			android:layout_width="30dp"
 			android:id="@+id/mainwindowButton3"/>
 
-		<ImageView
-			android:src="@drawable/close"
+		<com.yzrilyzr.icondesigner.VecView
+			vec="close"
 			android:layout_height="30dp"
 			android:layout_width="30dp"
 			android:id="@+id/mainwindowButton4"/>

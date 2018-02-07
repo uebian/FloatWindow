@@ -8,14 +8,10 @@ public class myLinearLayout extends LinearLayout
 	public myLinearLayout(Context c, AttributeSet a)
 	{
 		super(c, a);
-		init();
+		setBackgroundColor(uidata.UI_COLOR_MAIN);
 	}
 	public myLinearLayout(Context c)
 	{
 		this(c,null);
-	}
-	public void init()
-	{
-		setBackgroundColor(uidata.UI_COLOR_MAIN);
 	}
 }

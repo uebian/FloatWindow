@@ -26,7 +26,6 @@ public class WidgetUtils
 			}
 		}
 		return result;
-
 	}	
 	public static void setIcon(ImageView v,AttributeSet a)
 	{

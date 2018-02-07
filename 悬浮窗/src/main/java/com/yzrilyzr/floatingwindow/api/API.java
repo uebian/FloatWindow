@@ -1,26 +1,30 @@
 package com.yzrilyzr.floatingwindow.api;
-import android.content.*;
-import android.content.pm.*;
-import android.view.*;
-import java.lang.reflect.*;
-import java.util.zip.*;
-
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.res.Resources;
-import java.io.InputStream;
-import java.util.List;
-import org.xmlpull.v1.XmlPullParser;
+import android.view.LayoutInflater;
+import android.view.View;
+import com.yzrilyzr.floatingwindow.IData;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
-import com.yzrilyzr.floatingwindow.IData;
+import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import org.xmlpull.v1.XmlPullParser;
 
 public class API
 {
     public static final String WINDOW_CLASS="com.yzrilyzr.floatingwindow.Window";
-    public static final int API_VERSION=1;
-	public static final float density=Resources.getSystem().getDisplayMetrics().density;
+    public static final float density=Resources.getSystem().getDisplayMetrics().density;
     public static void startMainService(Context ctx,String targetClass)
     {
-		Intent intent=new Intent();
+        startMainService(ctx,new Intent(),targetClass);
+    }
+    public static void startMainService(Context ctx,Intent intent,String targetClass)
+    {
         intent.setAction("com.yzrilyzr.Service");
         intent.setPackage("com.yzrilyzr.floatingwindow");
         intent.putExtra("pkg",ctx.getPackageName());
@@ -30,12 +34,8 @@ public class API
     public static void startMainActivity(Context ctx,String targetClass)
     {
 		Intent intent=new Intent();
-        intent.setAction("com.yzrilyzr.Service");
-        intent.setPackage("com.yzrilyzr.floatingwindow");
-        intent.putExtra("pkg",ctx.getPackageName());
-        intent.putExtra("class",targetClass);
-		intent.putExtra(IData.TAG,IData.ACTIVITY);
-        ctx.startService(intent);
+        intent.putExtra(IData.TAG,IData.ACTIVITY);
+        startMainService(ctx,intent,targetClass);
     }
     public static InputStream getPkgFile(Context ctx,String pkgName,String file)throws Throwable
     {
