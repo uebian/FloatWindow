@@ -45,6 +45,7 @@ public class WebViewer implements DownloadListener,OnClickListener,Window.Window
 		w=new Window(c,util.px(300),util.px(360))
 			.setTitle("WebViewer")
 			.addView(v)
+			.setIcon("internet")
 			.show();
 		web=(WebView) v.getChildAt(2);
 		prog=(myProgressBar) v.getChildAt(1);

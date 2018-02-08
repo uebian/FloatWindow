@@ -32,9 +32,10 @@ public class Downloader implements OnClickListener
 		String p1=e.getStringExtra("url");
 		if(p1==null)p1="";
 		View v=LayoutInflater.from(c).inflate(R.layout.window_webviewer_download,null);
-		w=new Window(c,-2,-2)
+		w=new Window(c,util.px(300),-2)
 			.setTitle("下载器")
 			.addView(v)
+			.setIcon("download")
 			.show();
 		e1=(EditText)v.findViewById(R.id.windowwebviewerdownloadmyEditText1);
 		e2=(EditText) v.findViewById(R.id.windowwebviewerdownloadmyEditText2);
@@ -91,7 +92,7 @@ public class Downloader implements OnClickListener
             }
 			catch (Exception e)
 			{
-				myToast.s(ctx,"下载失败");
+				util.toast(ctx,"下载失败");
             }   
 		}
 	}
