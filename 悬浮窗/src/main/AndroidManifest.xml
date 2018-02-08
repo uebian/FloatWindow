@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yzrilyzr.floatingwindow" >
+	<uses-permission android:name="android.permission.INTERNET"/>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <application
         android:icon="@drawable/icon"
+		android:hardwareAccelerated="true"
 		android:largeHeap="true"
 		android:label="悬浮窗">
         <activity
@@ -48,6 +50,6 @@
             android:value="true"/>
 		<meta-data
             android:name="fwpluginclasses"
-            android:value="菜单:.apps.Menu;"/>
+            android:value="菜单:.apps.Menu;浏览器:.apps.WebViewer;下载器:.apps.Downloader"/>
     </application>
 </manifest>

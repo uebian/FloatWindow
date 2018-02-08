@@ -9,7 +9,8 @@ public final class cls
 	MESSAGE=p+"Message",
 	MENU=p+"Menu",
 	PLUGINPICKER=p+"PluginPicker",
-	IMAGEVIEWER=p+"ImageViewer"
+	IMAGEVIEWER=p+"ImageViewer",
+	DOWNLOADER=p+"Downloader"
 	;
 	
 }
