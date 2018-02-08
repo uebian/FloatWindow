@@ -12,7 +12,7 @@
 
 		<com.yzrilyzr.ui.myLinearLayoutRipple
 			android:layout_height="wrap_content"
-			android:layout_width="50dp"
+			android:layout_width="60dp"
 			android:orientation="vertical"
 			android:gravity="center"
 			android:id="@+id/windowcontrolpanelmyLinearLayoutRound1"
@@ -22,8 +22,7 @@
 				android:layout_height="30dp"
 				android:layout_width="30dp"
 				android:layout_margin="5dp"
-				
-				android:scaleType="fitXY"/>
+				vec="settings"/>
 
 			<com.yzrilyzr.ui.myTextView
 				android:layout_height="wrap_content"
@@ -34,7 +33,7 @@
 
 		<com.yzrilyzr.ui.myLinearLayoutRipple
 			android:layout_height="wrap_content"
-			android:layout_width="50dp"
+			android:layout_width="60dp"
 			android:orientation="vertical"
 			android:gravity="center"
 			android:layout_margin="5dp"

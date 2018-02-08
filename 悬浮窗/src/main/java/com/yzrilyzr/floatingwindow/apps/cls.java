@@ -7,7 +7,9 @@ public final class cls
 	LOAD=p+"Load",
 	STARTBUTTON=p+"StartButton",
 	MESSAGE=p+"Message",
-	MENU=p+"Menu"
+	MENU=p+"Menu",
+	PLUGINPICKER=p+"PluginPicker",
+	IMAGEVIEWER=p+"ImageViewer"
 	;
 	
 }

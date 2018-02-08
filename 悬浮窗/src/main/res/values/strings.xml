@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FloatWindow</string>
+	<string name="acc_des">悬浮窗停止运行快捷键(按菜单键3下，然后按返回键3下)防止其他恶意插件对您的设备造成伤害\n(我们不会收集您的个人隐私)\n\n当您停止本软件后，按键可能短时间内会无响应</string>
 </resources>

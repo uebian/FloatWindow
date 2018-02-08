@@ -8,8 +8,7 @@ public class BroadcastReceiver extends BroadcastReceiver
     @Override
     public void onReceive(Context p1, Intent p2)
     {
-		p1.stopService(new Intent(p1,PluginService.class));
-        System.exit(0);
+		PluginService.fstop(p1);
     }
     
 }

@@ -1,75 +1,17 @@
 package com.yzrilyzr.floatingwindow;
-import android.widget.*;
-import com.yzrilyzr.ui.*;
-
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.os.Handler;
 import android.os.IBinder;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import com.yzrilyzr.floatingwindow.Window.WindowInterface;
-import com.yzrilyzr.floatingwindow.view.LongTextView;
-import com.yzrilyzr.floatingwindow.view.StarterView;
-import com.yzrilyzr.myclass.ClassSrc;
-import com.yzrilyzr.myclass.util;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.yzrilyzr.ui.uidata;
 public class MainService extends Service
 {
-    private Context ctx=this;
-    private boolean created=false;
+    
     @Override
     public IBinder onBind(Intent p1)
     {
         // TODO: Implement this method
         return null;
-    }
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
-        // TODO: Implement this method
-		
-        /*if(intent!=null)
-        {
-            switch(intent.getIntExtra(IData.TAG,0))
-			{
-				case IData.START:start();break;
-				case IData.SETTINGS:showMenu();break;
-				case IData.START_PLUGIN:showStarterButton();break;
-			}
-        }*/
-        return super.onStartCommand(intent, flags, startId);
-    }
-    @Override
-    public void onDestroy()
-    {
-        // TODO: Implement this method
-        super.onDestroy();
-        stopForeground(false);
-    }
-    @Override
-    public void onCreate()
-    {
-        // TODO: Implement this method
-        super.onCreate();
-        if(created)return;
-        uidata.readData(this);
     }
 /*
     private void showSystemStatus()

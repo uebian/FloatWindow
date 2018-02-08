@@ -12,6 +12,7 @@ import com.yzrilyzr.ui.myTextViewBack;
 import com.yzrilyzr.ui.uidata;
 public class Window implements View.OnClickListener,View.OnTouchListener,View.OnLongClickListener
 {
+	public static Window topWindow;
     private Context ctx;
     private WindowManager window;
     private WindowManager.LayoutParams windowParam,minParam;
@@ -119,6 +120,7 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     {
         if(windowParam.type!=WindowManager.LayoutParams.TYPE_PHONE)throw new SecurityException("不能更改悬浮窗种类");
         window.addView(winView,windowParam);
+		topWindow=this;
         return this;
     }
     public Window setIcon(Drawable b)
@@ -259,7 +261,7 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     }
     public Window dismiss()
     {
-        window.removeView(winView);
+        window.removeViewImmediate(winView);
         return this;
     }
     public Window setSize(int w,int h)
@@ -304,7 +306,10 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     public boolean onTouch(View p1, MotionEvent p2)
     {
         // TODO: Implement this method
-        //update();/*
+        if(topWindow!=this){
+			dismiss();
+			show();
+		}
         if(maxwin&&!minwin)return true;
         if(p1==minButton||p1==titleBar)return moveableView(p1,p2);
         int x=(int) p2.getX(),y=(int) p2.getY(),rx=(int) p2.getRawX(),ry=(int) p2.getRawY(),w=p1.getWidth(),h=p1.getHeight();

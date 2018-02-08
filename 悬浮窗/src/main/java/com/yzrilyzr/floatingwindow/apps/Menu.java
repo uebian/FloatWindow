@@ -10,7 +10,9 @@ import com.yzrilyzr.floatingwindow.Window;
 
 public class Menu implements OnClickListener
 {
+	Context c;
 	public Menu(Context ctx,Intent e){
+		c=ctx;
 		final Window w=new Window(ctx,-2,-2);
        	w.setBar(8,8,8,0).setIcon("");
         View v=LayoutInflater.from(ctx).inflate(R.layout.window_menu,null);
@@ -47,9 +49,7 @@ public class Menu implements OnClickListener
 				//showAbout();
 				break;
 			case R.id.windowcontrolpanelmyLinearLayoutRound6:
-				//stopSelf();
-				//stopService(new Intent(ctx,PluginService.class));
-				System.exit(0);
+				PluginService.fstop(c);
 				break;
 		}
 	}

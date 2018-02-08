@@ -16,14 +16,17 @@ import com.yzrilyzr.ui.myToast;
 import com.yzrilyzr.floatingwindow.api.API;
 import com.yzrilyzr.icondesigner.VecView;
 
-public class StartButton implements StarterView.listener,View.OnTouchListener,View.OnClickListener
+public class StartButton implements StarterView.Listener,View.OnTouchListener,View.OnClickListener
 {
 	Window button,menu;
 	Context ctx;
 	int code=-1;
 	StarterView cv;
+	private static boolean once=false;
 	public StartButton(Context ctx,Intent e)
 	{
+		if(once)return;
+		once=true;
 		this.ctx=ctx;
 		//button
 		int dd=util.px(30);
@@ -73,17 +76,15 @@ public class StartButton implements StarterView.listener,View.OnTouchListener,Vi
 		menu.dismiss();
 		if(code==3)
 		{
-			API.startMainService(ctx,"com.yzrilyzr.floatingwindow.apps.Menu");
+			API.startMainService(ctx,cls.MENU);
 		}
 		if(code==4)
 		{
-			// stopSelf();
-			// stopService(new Intent(ctx,PluginService.class));
-			System.exit(0);
+			PluginService.fstop(ctx);
 		}
 		if(code==5)
 		{
-			// showStartApp();
+			API.startMainService(ctx,cls.PLUGINPICKER);
 		}
 	}
 	@Override

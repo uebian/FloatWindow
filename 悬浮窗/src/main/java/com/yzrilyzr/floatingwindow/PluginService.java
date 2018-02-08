@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.IBinder;
 import android.widget.ScrollView;
+import com.yzrilyzr.floatingwindow.api.API;
+import com.yzrilyzr.floatingwindow.apps.cls;
 import com.yzrilyzr.myclass.util;
 import com.yzrilyzr.ui.myTextView;
 import com.yzrilyzr.ui.myTextViewBack;
@@ -16,7 +18,6 @@ import dalvik.system.PathClassLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import com.yzrilyzr.ui.myToast;
 
 public class PluginService extends android.app.Service
 {
@@ -39,12 +40,15 @@ public class PluginService extends android.app.Service
             .setLights(uidata.UI_COLOR_MAIN,500,2000);
         Notification notification1 = builder1.build();
         startForeground(1,notification1);
-        if(intent!=null)
-            loadPlugin(ctx,intent);
+        if(intent!=null)loadPlugin(ctx,intent);
         invokePlugin("onStartCommand",intent,flags,startId);
         return START_STICKY;
     }
-    private void loadPlugin(final Context ctx,final Intent intent)
+	public static final void fstop(Context c){
+		c.stopService(new Intent(c,PluginService.class));
+		System.exit(0);
+	}
+    public static final void loadPlugin(final Context ctx,final Intent intent)
     {
         String pkg="";
         PackageManager PackageManager=ctx.getPackageManager();
@@ -56,7 +60,7 @@ public class PluginService extends android.app.Service
                     intent.setClass(ctx,PluginActivity.class);
                     intent.setAction(null);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    ctx.startActivity(intent);
                     return;
             }
             pkg=intent.getStringExtra("pkg");
@@ -75,7 +79,6 @@ public class PluginService extends android.app.Service
             }
             Object o=c.getConstructor(Context.class,Intent.class).newInstance(ctx,intent);
             pluginObject.add(o);
-			myToast.s(ctx,"插件已载入");
         }
         catch(Throwable e)
         {
@@ -100,8 +103,7 @@ public class PluginService extends android.app.Service
                 .show();
         }
     }
-
-    private Object invokePlugin(String method,Object... param)
+    private static final Object invokePlugin(String method,Object... param)
     {
         if(pluginObject!=null)
             for(Object o:pluginObject)
@@ -126,7 +128,7 @@ public class PluginService extends android.app.Service
             }
 		return null;
     }
-    private String handleException(Throwable e)
+    private static final String handleException(Throwable e)
     {
         String msg=null;
         if(e instanceof InvocationTargetException)
@@ -145,9 +147,6 @@ public class PluginService extends android.app.Service
         super.onCreate();
         uidata.isInit=true;
         uidata.readData(ctx);
-        /*Intent i=new Intent(this,MainService.class);
-        i.putExtra("IData","pluginStart");
-        startService(i);*/
         invokePlugin("onCreate");
     }
     @Override

@@ -54,7 +54,7 @@
 			android:id="@+id/mainwindowButton3"/>
 
 		<com.yzrilyzr.icondesigner.VecView
-			vec="close"
+			vec="closewin"
 			android:layout_height="30dp"
 			android:layout_width="30dp"
 			android:id="@+id/mainwindowButton4"/>

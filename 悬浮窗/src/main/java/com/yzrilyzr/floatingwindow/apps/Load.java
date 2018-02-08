@@ -20,7 +20,10 @@ public class Load implements Runnable
 {
 	Window w;
 	Context c;
+	private static boolean once=false;
 	public Load(Context c,Intent e){
+		if(once)return;
+		once=true;
 		this.c=c;
 		int wid,hei;
         w=new Window(c,wid=util.px(210),hei=util.px(260));
