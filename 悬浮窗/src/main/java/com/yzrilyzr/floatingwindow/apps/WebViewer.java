@@ -3,41 +3,33 @@ import android.webkit.*;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 import com.yzrilyzr.floatingwindow.R;
 import com.yzrilyzr.floatingwindow.Window;
+import com.yzrilyzr.floatingwindow.api.API;
 import com.yzrilyzr.myclass.util;
 import com.yzrilyzr.ui.myEditText;
+import com.yzrilyzr.ui.myImageButton;
 import com.yzrilyzr.ui.myProgressBar;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.URLDecoder;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import com.yzrilyzr.ui.myButton;
-import android.widget.EditText;
-import com.yzrilyzr.ui.myToast;
-import com.yzrilyzr.floatingwindow.api.API;
+import android.graphics.drawable.BitmapDrawable;
 
-public class WebViewer implements DownloadListener,OnClickListener,Window.WindowInterface
+public class WebViewer implements DownloadListener,OnClickListener,Window.WindowInterface,TextView.OnEditorActionListener
 {
 	WebView web;
 	myProgressBar prog;
 	Context ctx;
 	Window w,cv;
 	myEditText edit;
+	myImageButton ba,bb,bc,bd;
 	public WebViewer(Context c,Intent e)
 	{
 		ctx=c;
@@ -51,7 +43,12 @@ public class WebViewer implements DownloadListener,OnClickListener,Window.Window
 		prog=(myProgressBar) v.getChildAt(1);
 		ViewGroup f=(ViewGroup)v.getChildAt(0);
 		edit=(myEditText) f.getChildAt(0);
-		f.getChildAt(1).setOnClickListener(this);
+		edit.setOnEditorActionListener(this);
+		f=(ViewGroup)v.getChildAt(3);	
+		(ba=(myImageButton) f.getChildAt(0)).setOnClickListener(this);
+		(bb=(myImageButton) f.getChildAt(1)).setOnClickListener(this);
+		(bc=(myImageButton) f.getChildAt(2)).setOnClickListener(this);
+		(bd=(myImageButton) f.getChildAt(3)).setOnClickListener(this);
 		WebSettings s=web.getSettings();
 		s.setJavaScriptEnabled(true);
 		s.setPluginState(WebSettings.PluginState.ON);
@@ -71,10 +68,18 @@ public class WebViewer implements DownloadListener,OnClickListener,Window.Window
 					web.loadUrl(url);
 					return true;
 				}
+				@Override
+				public void onPageStarted(WebView view,String url,Bitmap favicon) {
+					edit.setText(url);
+					w.setIcon(new BitmapDrawable(favicon));
+					if(favicon==null)w.setIcon("internet");
+				}
 			});
 		web.setWebChromeClient(new WebChromeClient(){
 				public void onProgressChanged(WebView view, int progress)   
 				{
+					ba.setEnabled(web.canGoBack());
+					bb.setEnabled(web.canGoForward());
 					prog.setVisibility(View.VISIBLE); 
 					prog.setProgress(progress);     
 					if(progress == 100)
@@ -134,6 +139,19 @@ public class WebViewer implements DownloadListener,OnClickListener,Window.Window
 		web.setDownloadListener(this);
 		String ur=e.getStringExtra("url");
 		if(ur!=null)web.loadUrl(ur);
+		else web.loadUrl("http://m.hao123.com/");  
+	}
+	@Override
+	public boolean onEditorAction(TextView p1, int p2, KeyEvent p3)
+	{
+		if(p2==6)
+		{
+			String s=edit.getText().toString();
+			if(s.indexOf("://")==-1)s="http://www.baidu.com/s?word="+s;
+			edit.setText(s);
+			web.loadUrl(s);
+		}
+		return false;
 	}
 	@Override
 	public void onSizeChanged(int w, int h, int oldw, int oldh)
@@ -158,14 +176,14 @@ public class WebViewer implements DownloadListener,OnClickListener,Window.Window
 	@Override
 	public void onClick(View p1)
 	{
-		String s=edit.getText().toString();
-		if(s.indexOf("://")==-1)s="http://"+s;
-		edit.setText(s);
-		web.loadUrl(s);
+		if(p1==ba)web.goBack();
+		else if(p1==bb)web.goForward();
+		else if(p1==bc)web.reload();
+		else if(p1==bd)web.stopLoading();
 	}
 	@Override
 	public void onDownloadStart(String p1, String p2, String p3, String p4, long p5)
 	{
-		API.startMainService(ctx,new Intent().putExtra("url",p1),cls.DOWNLOADER);
+		API.startMainService(ctx,new Intent().putExtra("url",p1).putExtra("length",p5),cls.DOWNLOADER);
 	}
 }

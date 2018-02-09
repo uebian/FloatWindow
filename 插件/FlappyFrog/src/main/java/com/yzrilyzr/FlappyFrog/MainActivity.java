@@ -7,6 +7,7 @@ import android.widget.Toast;
 import java.io.StringWriter;
 import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
+import android.content.Intent;
 
 public class MainActivity extends Activity 
 {
@@ -17,7 +18,7 @@ public class MainActivity extends Activity
         //setContentView(R.layout.main);
         try
         {
-            API.startMainService(this,"com.yzrilyzr.FlappyFrog.Main");
+            API.startMainService(this,new Intent(),"com.yzrilyzr.FlappyFrog.Main");
             //API.startMainActivity(this,"com.yzrilyzr.FlappyFrog.ToActivity");
         }
         catch(Throwable e)

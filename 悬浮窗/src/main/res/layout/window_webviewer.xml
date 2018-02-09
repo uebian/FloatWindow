@@ -16,12 +16,8 @@
 			android:inputType="textUri"
 			android:layout_width="wrap_content"
 			android:layout_weight="1.0"
+			android:hint="搜索或输入网址"
 			android:singleLine="true"/>
-
-		<com.yzrilyzr.ui.myButton
-			android:layout_height="wrap_content"
-			android:text="Go"
-			android:layout_width="wrap_content"/>
 
 	</LinearLayout>
 
@@ -31,9 +27,40 @@
 		android:visibility="gone"/>
 
 	<android.webkit.WebView
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:layout_width="match_parent"
 		android:layout_weight="1.0"/>
+
+	<LinearLayout
+		android:layout_height="30dp"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			vec="back"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			vec="forward"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			vec="refresh"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+		<com.yzrilyzr.ui.myImageButton
+			android:layout_height="wrap_content"
+			vec="closewin"
+			android:layout_width="wrap_content"
+			android:layout_weight="1.0"/>
+
+	</LinearLayout>
 
 </LinearLayout>
 

@@ -14,7 +14,7 @@ public class myImageButton extends ImageButton implements myTouchProcessor.Event
     public myImageButton(Context c,AttributeSet a)
     {
         super(c,a);
-        setScaleType(ImageView.ScaleType.FIT_XY);
+        setScaleType(ImageView.ScaleType.FIT_CENTER);
         WidgetUtils.setIcon(this,a);
 		float radius=uidata.UI_RADIUS;
 		if(a!=null)

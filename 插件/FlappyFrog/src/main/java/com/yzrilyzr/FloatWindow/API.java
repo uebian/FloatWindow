@@ -15,7 +15,7 @@ public class API
     public static Intent intent=new Intent();
     public static final String WINDOW_CLASS="com.yzrilyzr.floatingwindow.Window";
     public static final int API_VERSION=2;
-    public static void startMainService(Context ctx,String targetClass)
+    public static void startMainService(Context ctx,Intent intent,String targetClass)
     {
         intent.setAction("com.yzrilyzr.Service");
         intent.setPackage("com.yzrilyzr.floatingwindow");
@@ -24,11 +24,11 @@ public class API
         //Intent i2=new Intent(createExplicitFromImplicitIntent(ctx,intent));
         ctx.startService(intent);
     }
-    public static void startMainActivity(Context ctx,String targetClass)
+ /*   public static void startMainActivity(Context ctx,String targetClass)
     {
         intent.putExtra("IDATA","ACTIVITY");
         startMainService(ctx,targetClass);
-    }
+    }*/
     public static InputStream getPkgFile(Context ctx,String pkgName,String file) 
     {
         try

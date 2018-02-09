@@ -240,12 +240,7 @@ public class Main implements SurfaceHolder.Callback,Runnable,MediaPlayer.OnCompl
             }
 			if(githubObj.contains(e.getX(),e.getY()))
 			{
-				Intent intent = new Intent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				intent.setAction(Intent.ACTION_VIEW);
-				Uri content_url = Uri.parse("https://www.github.com/yzrilyzr");   
-				intent.setData(content_url);  
-				ctx.startActivity(intent);
+				API.startMainService(ctx,new Intent().putExtra("url","https://www.github.com/yzrilyzr"),"com.yzrilyzr.floatingwindow.apps.WebViewer");   
 				return false;
 			}
 			if(NOW==1)

@@ -1,54 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:gravity="center">
+	android:layout_width="match_parent"
+	android:orientation="vertical">
 
 	<LinearLayout
-		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
-		android:orientation="horizontal"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
 		android:gravity="center">
 
-		<com.yzrilyzr.ui.myTextViewBack
-			android:layout_height="wrap_content"
-			android:text="链接"
-			android:layout_width="wrap_content"/>
-
-		<com.yzrilyzr.ui.myEditText
+		<LinearLayout
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:layout_weight="1.0"
-			android:id="@+id/windowwebviewerdownloadmyEditText1"/>
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="链接"
+				android:layout_width="wrap_content"/>
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:layout_weight="1.0"
+				android:id="@+id/windowwebviewerdownloadmyEditText1"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<com.yzrilyzr.ui.myTextViewBack
+				android:layout_height="wrap_content"
+				android:text="下载位置"
+				android:layout_width="wrap_content"/>
+
+			<com.yzrilyzr.ui.myEditText
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:layout_weight="1.0"
+				android:id="@+id/windowwebviewerdownloadmyEditText2"/>
+
+		</LinearLayout>
+
+		<com.yzrilyzr.ui.myButton
+			android:layout_height="wrap_content"
+			android:text="下载"
+			android:layout_width="wrap_content"
+			android:id="@+id/windowwebviewerdownloadmyButton1"/>
 
 	</LinearLayout>
 
 	<LinearLayout
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:layout_width="match_parent"
-		android:orientation="horizontal"
-		android:gravity="center">
+		android:orientation="vertical">
 
-		<com.yzrilyzr.ui.myTextViewBack
-			android:layout_height="wrap_content"
-			android:text="下载位置"
-			android:layout_width="wrap_content"/>
-
-		<com.yzrilyzr.ui.myEditText
+		<com.yzrilyzr.ui.myProgressBar
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:layout_weight="1.0"
-			android:id="@+id/windowwebviewerdownloadmyEditText2"/>
+			android:id="@+id/windowwebviewerdownloadmyProgressBar1"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center">
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="暂停"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowwebviewerdownloadmyButton2"/>
+
+			<com.yzrilyzr.ui.myButton
+				android:layout_height="wrap_content"
+				android:text="取消"
+				android:layout_width="wrap_content"
+				android:id="@+id/windowwebviewerdownloadmyButton3"/>
+
+		</LinearLayout>
 
 	</LinearLayout>
-
-	<com.yzrilyzr.ui.myButton
-		android:layout_height="wrap_content"
-		android:text="下载"
-		android:layout_width="wrap_content"
-		android:id="@+id/windowwebviewerdownloadmyButton1"/>
 
 </LinearLayout>
 
