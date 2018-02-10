@@ -144,17 +144,21 @@ public class myCanvas extends SurfaceView implements SurfaceHolder.Callback,View
 	@Override
 	public void surfaceCreated(SurfaceHolder holder)
 	{
+		
+	}
+	@Override
+	public void surfaceChanged(SurfaceHolder holder, int format, int width,int height)
+	{
+		if(bi!=null)bi.recycle();
 		bi = Bitmap.createBitmap(getWidth(), getHeight(),Bitmap.Config.ARGB_8888);
 		canvasTemp = new Canvas(bi);
 		draw();
 	}
 	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,int height)
-	{
-	}
-	@Override
 	public void surfaceDestroyed(SurfaceHolder holder)
 	{
+		bi.recycle();
+		bi=null;
 	}
 	@Override
 	public boolean onTouch(View v, MotionEvent event)

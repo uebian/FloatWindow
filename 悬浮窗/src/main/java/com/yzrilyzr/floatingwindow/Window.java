@@ -36,8 +36,10 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
         window=(WindowManager)ctx.getSystemService(ctx.WINDOW_SERVICE);
         windowParam=new WindowManager.LayoutParams(
             width,height,
-            WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|
+			WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS|
+			WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
             PixelFormat.RGBA_8888
         );
         windowParam.gravity=Gravity.LEFT|Gravity.TOP;
@@ -118,7 +120,6 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     }
     public Window show()
     {
-        if(windowParam.type!=WindowManager.LayoutParams.TYPE_PHONE)throw new SecurityException("不能更改悬浮窗种类");
         window.addView(winView,windowParam);
 		topWindow=this;
         return this;
@@ -147,7 +148,11 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
 	}
     public Window setFocusable(boolean f)
     {
-        windowParam.flags=f?windowParam.FLAG_NOT_TOUCH_MODAL:windowParam.FLAG_NOT_FOCUSABLE;
+		focusable=f;
+        windowParam.flags=
+			(focusable?windowParam.FLAG_NOT_TOUCH_MODAL:windowParam.FLAG_NOT_FOCUSABLE)|
+			(maxwin?0:WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)|
+			WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
         buttonFocusWin.setImageVec(f?"focusedwin":"unfocusedwin");
         window.updateViewLayout(winView,windowParam);
         return this;
@@ -198,7 +203,12 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     }
     public Window setMaxWin(boolean b)
     {
-        windowParam.width=b?-1:width;
+		maxwin=b;
+		windowParam.flags=
+			(focusable?windowParam.FLAG_NOT_TOUCH_MODAL:windowParam.FLAG_NOT_FOCUSABLE)|
+			(maxwin?0:WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)|
+			WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
+		windowParam.width=b?-1:width;
         windowParam.height=b?-1:height;
         buttonMaxWin.setImageVec(b?"restorewin":"maxwin");
         window.updateViewLayout(winView,windowParam);
@@ -220,6 +230,7 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     }
     public Window setMinWin(boolean b)
     {
+		minwin=b;
         if(b)
         {
             winView.removeView(contentView);
@@ -306,7 +317,8 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
     public boolean onTouch(View p1, MotionEvent p2)
     {
         // TODO: Implement this method
-        if(topWindow!=this){
+        if(topWindow!=this)
+		{
 			dismiss();
 			show();
 		}
@@ -416,7 +428,6 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
             case MotionEvent.ACTION_DOWN:
                 lastX = (int) event.getRawX();
                 lastY = (int) event.getRawY();
-				toNormal();
                 paramX = windowParam.x;
                 paramY = windowParam.y;
                 lastX2=paramX;
@@ -427,7 +438,6 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
                 int dy = (int) event.getRawY() - lastY;
                 windowParam.x = paramX + dx;
                 windowParam.y = paramY + dy;
-				toNormal();
                 window.updateViewLayout(winView,windowParam);
                 break;
             case MotionEvent.ACTION_UP:
@@ -445,15 +455,6 @@ public class Window implements View.OnClickListener,View.OnTouchListener,View.On
         }
         return true;
     }
-
-	private void toNormal()
-	{
-		if(windowParam.x<0)windowParam.x=0;
-		if(windowParam.y<0)windowParam.y=0;
-		if(windowParam.x+winView.getWidth()>util.getScreenWidth())windowParam.x=util.getScreenWidth()-winView.getWidth();
-		if(windowParam.y+winView.getHeight()>util.getScreenHeight())windowParam.y=util.getScreenHeight()-winView.getHeight();
-		if(inter!=null)inter.onPositionChanged(windowParam.x,windowParam.y);
-	}
 	public static final class ButtonCode
     {
         public static final int MIN=0,MAX=1,FOCUS=2,CLOSE=3,FOCUS_LONG=4,MIN_LONG=5,MAX_LONG=6,CLOSE_LONG=7;
